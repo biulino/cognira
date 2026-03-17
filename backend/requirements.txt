@@ -1,0 +1,54 @@
+# ── Framework ──────────────────────────
+fastapi==0.115.*
+uvicorn[standard]==0.34.*
+python-multipart==0.0.*
+
+# ── Database ───────────────────────────
+sqlalchemy[asyncio]==2.0.*
+asyncpg==0.30.*
+alembic==1.14.*
+greenlet==3.1.*
+
+# ── Auth ───────────────────────────────
+PyJWT>=2.8.0
+passlib[bcrypt]==1.7.*
+bcrypt==4.0.1
+pyotp==2.9.*
+qrcode[pil]==8.0
+
+# ── Validation / serialization ─────────
+pydantic==2.10.*
+pydantic-settings==2.7.*
+email-validator==2.2.*
+
+# ── AI ─────────────────────────────────
+openai==1.61.*
+pgvector>=0.3
+
+# ── Object storage ─────────────────────
+minio==7.2.*
+
+# ── Export ─────────────────────────────
+openpyxl==3.1.*
+weasyprint==63.*
+fpdf2==2.8.*
+
+# ── Antivirus ──────────────────────────
+clamd==1.0.*
+
+# ── Utilities ──────────────────────────
+httpx==0.28.*
+python-dateutil==2.9.*
+websockets==13.*
+
+# ── Push Notifications ─────────────────
+pywebpush==2.0.*
+py-vapid==1.9.*
+
+# ── SAML 2.0 SP ────────────────────────
+python3-saml==1.16.*
+
+# ── Testing ────────────────────────────
+pytest==8.3.*
+pytest-asyncio==0.24.*
+httpx==0.28.*

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Cognira Intelligence — ambiente de demonstração. Credenciais de acesso, portais de cliente e informação técnica da plataforma."/>
+<title>Demo &mdash; Cognira Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="wrap nav-inner">
+    <a href="/home" class="nav-logo">
+      <div class="nav-mark">Q</div>
+      <span class="nav-brand">Cognira</span>
+    </a>
+    <div class="nav-links">
+      <a href="/home">In&iacute;cio</a>
+      <div class="nav-drop">
+        <button class="nav-dropbtn">Solu&ccedil;&otilde;es</button>
+        <div class="nav-dropmenu">
+          <a href="/solucoes/mystery-shopping">&#x1F50D;&thinsp; Mystery Shopping</a>
+          <a href="/solucoes/retail-audit">&#x1F4CA;&thinsp; Retail Audit</a>
+          <a href="/solucoes/contact-center">&#x1F4DE;&thinsp; Contact Center IA</a>
+          <a href="/solucoes/pesquisa-mercado">&#x1F4CB;&thinsp; Pesquisa de Mercado</a>
+        </div>
+      </div>
+      <a href="/casos-de-uso">Casos de Uso</a>
+      <a href="/plataforma">Plataforma</a>
+      <a href="/landing" class="nav-demo active">Demo ao Vivo</a>
+    </div>
+    <div class="nav-actions">
+      <a href="mailto:me@otokura.online" class="btn btn-primary btn-sm">Pedir demonstra&ccedil;&atilde;o</a>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+  <div class="mobile-menu-header">
+    <div style="display:flex;align-items:center;gap:9px">
+      <div class="nav-mark">Q</div>
+      <span class="nav-brand">Cognira</span>
+    </div>
+    <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Fechar menu">&#x2715;</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a href="/home">In&iacute;cio</a>
+    <button class="mm-section-btn" data-target="mm-solucoes">Solu&ccedil;&otilde;es<span class="mm-arrow">&#x203A;</span></button>
+    <div class="mm-section" id="mm-solucoes">
+      <a href="/solucoes/mystery-shopping">&#x1F50D; Mystery Shopping</a>
+      <a href="/solucoes/retail-audit">&#x1F4CA; Retail Audit</a>
+      <a href="/solucoes/contact-center">&#x1F4DE; Contact Center IA</a>
+      <a href="/solucoes/pesquisa-mercado">&#x1F4CB; Pesquisa de Mercado</a>
+    </div>
+    <a href="/casos-de-uso">Casos de Uso</a>
+    <a href="/plataforma">Plataforma</a>
+    <a href="/landing" class="active">Demo ao Vivo</a>
+  </div>
+  <div class="mobile-menu-actions">
+    <a href="mailto:me@otokura.online" class="btn btn-primary">Pedir demonstra&ccedil;&atilde;o</a>
+  </div>
+</div>
+
+<section class="hero" style="padding-bottom:48px">
+  <div class="wrap">
+    <div class="eyebrow" data-ao>Ambiente de Demonstração</div>
+    <h1 data-ao data-delay="80" style="max-width:700px">Cognira Intelligence<br><em>Plataforma CX</em></h1>
+    <p class="hero-desc" data-ao data-delay="150" style="max-width:580px">Plataforma unificada de mystery shopping, retail audit, contact center IA e pesquisa de mercado. Este ambiente contém dados demo realistas para exploração livre.</p>
+    <div class="hero-btns" data-ao data-delay="220">
+      <a href="/login" class="btn btn-primary btn-lg">&#x1F511; Entrar na Plataforma</a>
+      <a href="/tenant-admin" class="btn btn-outline btn-lg">&#x1F3E2; Tenant Admin</a>
+      <a href="/super-admin" class="btn btn-outline btn-lg" style="border-color:var(--ink3);color:var(--ink3)">&#x2699;&#xFE0F; Superadmin</a>
+      <a href="/docs" class="btn btn-outline btn-lg" style="border-color:var(--ink3);color:var(--ink3)">&#x1F4D6; Docs</a>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="sec alt">
+  <div class="wrap">
+    <div class="section-head" data-ao>
+      <span class="tag">Contas da plataforma</span>
+      <h2>Credenciais de acesso demo</h2>
+      <p style="color:var(--ink3);font-size:15px;margin-top:10px">Tenant activo: <strong>Cognira Demo</strong> &mdash; utilize as credenciais abaixo para explorar cada perfil de utilizador.</p>
+    </div>
+    <div style="overflow-x:auto" data-ao>
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        <thead>
+          <tr style="background:var(--bg);border-bottom:2px solid var(--border)">
+            <th style="text-align:left;padding:12px 16px;font-weight:700;color:var(--ink1)">Perfil</th>
+            <th style="text-align:left;padding:12px 16px;font-weight:700;color:var(--ink1)">Username <span style="font-weight:400;font-size:11px;color:var(--ink3)">(campo login)</span></th>
+            <th style="text-align:left;padding:12px 16px;font-weight:700;color:var(--ink1)">Password</th>
+            <th style="text-align:left;padding:12px 16px;font-weight:700;color:var(--ink1)">Acesso / Nota</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);background:#fff">
+            <td style="padding:12px 16px"><span style="display:inline-block;background:#7c3aed22;color:#7c3aed;font-weight:700;font-size:12px;padding:3px 10px;border-radius:20px">Superadmin</span></td>
+            <td style="padding:12px 16px;font-family:monospace;color:var(--ink2)">admin</td>
+            <td style="padding:12px 16px;font-family:monospace;font-weight:600">Cognira@Admin2026</td>
+            <td style="padding:12px 16px;color:var(--ink3)"><a href="/super-admin" style="color:var(--r)">/super-admin</a> &mdash; gere todos os tenants</td>
+          </tr>
+
+          <tr style="border-bottom:1px solid var(--border);background:#fff">
+            <td style="padding:12px 16px"><span style="display:inline-block;background:#16a34a22;color:#16a34a;font-weight:700;font-size:12px;padding:3px 10px;border-radius:20px">Coordenador</span></td>
+            <td style="padding:12px 16px;font-family:monospace;color:var(--ink2)">coordenador</td>
+            <td style="padding:12px 16px;font-family:monospace;font-weight:600">Cognira@Coord2026</td>
+            <td style="padding:12px 16px;color:var(--ink3)">Cognira Demo &mdash; gestão de estudos e visitas</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--bg)">
+            <td style="padding:12px 16px"><span style="display:inline-block;background:#d9770622;color:#d97706;font-weight:700;font-size:12px;padding:3px 10px;border-radius:20px">Validador</span></td>
+            <td style="padding:12px 16px;font-family:monospace;color:var(--ink2)">validador</td>
+            <td style="padding:12px 16px;font-family:monospace;font-weight:600">Cognira@Valid2026</td>
+            <td style="padding:12px 16px;color:var(--ink3)">Cognira Demo &mdash; validação e scoring de visitas</td>
+          </tr>
+          <tr style="background:#fff">
+            <td style="padding:12px 16px"><span style="display:inline-block;background:#0891b222;color:#0891b2;font-weight:700;font-size:12px;padding:3px 10px;border-radius:20px">Analista</span></td>
+            <td style="padding:12px 16px;font-family:monospace;color:var(--ink2)">analista1</td>
+            <td style="padding:12px 16px;font-family:monospace;font-weight:600">Cognira@Anal2026</td>
+            <td style="padding:12px 16px;color:var(--ink3)">Cognira Demo &mdash; execução de visitas no campo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAL CLIENTES -->
+<section class="sec">
+  <div class="wrap">
+    <div class="section-head" data-ao>
+      <span class="tag">Portal Cliente</span>
+      <h2>5 empresas demo com portal white-label</h2>
+      <p style="color:var(--ink3);font-size:15px;margin-top:10px">Cada empresa tem portal de cliente independente com branding próprio, dados de visitas e relatórios IA. Use as credenciais de cada portal abaixo para aceder a <a href="/login" style="color:var(--r)">/login</a> → <a href="/portal" style="color:var(--r)">/portal</a>.</p>
+    </div>
+    <div style="overflow-x:auto" data-ao>
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        <thead>
+          <tr style="background:var(--bg);border-bottom:2px solid var(--border)">
+            <th style="text-align:left;padding:12px 16px;font-weight:700;color:var(--ink1)">Cliente Demo</th>
+            <th style="text-align:left;padding:12px 16px;font-weight:700;color:var(--ink1)">Sector</th>
+            <th style="text-align:left;padding:12px 16px;font-weight:700;color:var(--ink1)">Username <span style="font-weight:400;font-size:11px;color:var(--ink3)">(campo login)</span></th>
+            <th style="text-align:left;padding:12px 16px;font-weight:700;color:var(--ink1)">Password</th>
+            <th style="text-align:left;padding:12px 16px;font-weight:700;color:var(--ink1)">Acesso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);background:#fff">
+            <td style="padding:12px 16px"><span style="display:inline-flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:#E60000;display:inline-block"></span><strong>ConnectSuite Pro</strong></span></td>
+            <td style="padding:12px 16px;color:var(--ink3)">Telecomunicações</td>
+            <td style="padding:12px 16px;font-family:monospace;color:var(--ink2)">cliente_vodafone</td>
+            <td style="padding:12px 16px;font-family:monospace;font-weight:600">Cognira@Vodafone26</td>
+            <td style="padding:12px 16px"><a href="/login" style="color:var(--r);font-size:13px">/login &#x2192; /portal</a></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--bg)">
+            <td style="padding:12px 16px"><span style="display:inline-flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:#FFCC00;display:inline-block"></span><strong>MediaSuite Plus</strong></span></td>
+            <td style="padding:12px 16px;color:var(--ink3)">Media / Telecom</td>
+            <td style="padding:12px 16px;font-family:monospace;color:var(--ink2)">cliente_nos</td>
+            <td style="padding:12px 16px;font-family:monospace;font-weight:600">Cognira@Nos2026</td>
+            <td style="padding:12px 16px"><a href="/login" style="color:var(--r);font-size:13px">/login &#x2192; /portal</a></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:#fff">
+            <td style="padding:12px 16px"><span style="display:inline-flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:#FFC300;display:inline-block"></span><strong>FoodSuite QSR</strong></span></td>
+            <td style="padding:12px 16px;color:var(--ink3)">Restauração</td>
+            <td style="padding:12px 16px;font-family:monospace;color:var(--ink2)">cliente_mcd</td>
+            <td style="padding:12px 16px;font-family:monospace;font-weight:600">Cognira@Mcd2026</td>
+            <td style="padding:12px 16px"><a href="/login" style="color:var(--r);font-size:13px">/login &#x2192; /portal</a></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:var(--bg)">
+            <td style="padding:12px 16px"><span style="display:inline-flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:#FF6600;display:inline-block"></span><strong>EnergySuite Retail</strong></span></td>
+            <td style="padding:12px 16px;color:var(--ink3)">Energia / Combustíveis</td>
+            <td style="padding:12px 16px;font-family:monospace;color:var(--ink2)">cliente_galp</td>
+            <td style="padding:12px 16px;font-family:monospace;font-weight:600">Cognira@Galp2026</td>
+            <td style="padding:12px 16px"><a href="/login" style="color:var(--r);font-size:13px">/login &#x2192; /portal</a></td>
+          </tr>
+          <tr style="background:#fff">
+            <td style="padding:12px 16px"><span style="display:inline-flex;align-items:center;gap:8px"><span style="width:12px;height:12px;border-radius:50%;background:#FFD100;display:inline-block"></span><strong>TechRetailSuite</strong></span></td>
+            <td style="padding:12px 16px;color:var(--ink3)">Tecnologia / Retalho</td>
+            <td style="padding:12px 16px;font-family:monospace;color:var(--ink2)">cliente_fnac</td>
+            <td style="padding:12px 16px;font-family:monospace;font-weight:600">Cognira@Fnac2026</td>
+            <td style="padding:12px 16px"><a href="/login" style="color:var(--r);font-size:13px">/login &#x2192; /portal</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK ACCESS -->
+<section class="sec alt">
+  <div class="wrap">
+    <div class="section-head" data-ao>
+      <span class="tag">Acesso rápido</span>
+      <h2>Explore a plataforma</h2>
+    </div>
+    <div class="grid g4" data-stagger>
+      <a href="/login" style="text-decoration:none">
+        <div class="card" style="cursor:pointer;transition:border-color .2s">
+          <div class="card-icon">&#x1F511;</div>
+          <h3>Login Plataforma</h3>
+          <p>Aceda ao dashboard principal com as credenciais demo acima.</p>
+          <span style="display:inline-block;margin-top:12px;font-size:13px;color:var(--r);font-weight:600">/login &#x2192;</span>
+        </div>
+      </a>
+      <a href="/tenant-admin" style="text-decoration:none">
+        <div class="card" style="cursor:pointer">
+          <div class="card-icon">&#x1F3E2;</div>
+          <h3>Tenant Admin</h3>
+          <p>Gestão de utilizadores, módulos e configurações do tenant.</p>
+          <span style="display:inline-block;margin-top:12px;font-size:13px;color:var(--r);font-weight:600">/tenant-admin &#x2192;</span>
+        </div>
+      </a>
+      <a href="/super-admin" style="text-decoration:none">
+        <div class="card" style="cursor:pointer">
+          <div class="card-icon">&#x2699;&#xFE0F;</div>
+          <h3>Superadmin</h3>
+          <p>Gestão global de todos os tenants, planos e infra da plataforma.</p>
+          <span style="display:inline-block;margin-top:12px;font-size:13px;color:var(--r);font-weight:600">/super-admin &#x2192;</span>
+        </div>
+      </a>
+      <a href="/docs" style="text-decoration:none">
+        <div class="card" style="cursor:pointer">
+          <div class="card-icon">&#x1F4D6;</div>
+          <h3>Documentação</h3>
+          <p>Guias por role, referência de funcionalidades e OpenAPI docs.</p>
+          <span style="display:inline-block;margin-top:12px;font-size:13px;color:var(--r);font-weight:600">/docs &#x2192;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="sec dark">
+  <div class="wrap">
+    <div class="section-head" data-ao>
+      <span class="tag">Stack técnico</span>
+      <h2 style="color:#fff">Arquitectura da plataforma</h2>
+    </div>
+    <div class="grid g4" data-stagger>
+      <div class="card dk"><div class="card-icon">&#x26A1;</div><h3>FastAPI + Python 3.12</h3><p>Backend assíncrono, tipagem estrita, validação Pydantic. 25+ routers, 100+ endpoints. Docs OpenAPI automáticas em <a href="/api/docs" style="color:#ff9977">/api/docs</a>.</p></div>
+      <div class="card dk"><div class="card-icon">&#x1F5C4;</div><h3>PostgreSQL 16 + pgvector</h3><p>Row-Level Security por tenant, pgcrypto para PII, pgvector para embeddings RAG semântico. 24 migrations Alembic.</p></div>
+      <div class="card dk"><div class="card-icon">&#x1F9E0;</div><h3>Cognira AI (14 módulos)</h3><p>Transcrição STT, visão computacional, text-to-SQL, RAG, scoring, coaching, relatórios narrativos e wizard de estudos.</p></div>
+      <div class="card dk"><div class="card-icon">&#x1F4F1;</div><h3>Next.js 14 + PWA</h3><p>40+ páginas, i18n PT/EN/ES/FR, WebRTC P2P, IndexedDB offline, Web Push VAPID e service worker.</p></div>
+      <div class="card dk"><div class="card-icon">&#x1F512;</div><h3>Nginx + TLS 1.3</h3><p>Reverse proxy, HSTS, CSP, rate limiting por zona. MinIO S3-compatible para fotos. ClamAV antivírus em uploads.</p></div>
+      <div class="card dk"><div class="card-icon">&#x1F510;</div><h3>JWT + 2FA + SSO</h3><p>Tokens 15min + refresh 7d, TOTP MFA, OIDC/SSO (Azure AD, Okta, Google), RBAC 6 roles + permissões por estudo.</p></div>
+      <div class="card dk"><div class="card-icon">&#x1F433;</div><h3>Docker Compose</h3><p>7 containers: backend, frontend, postgres, minio, clamav, nginx, coturn. Deploy reprodutível, migrations automáticas.</p></div>
+      <div class="card dk"><div class="card-icon">&#x1F4CB;</div><h3>Audit + Webhooks</h3><p>Audit log imutável com IP e payload. Webhooks HMAC-SHA256 com delivery log. API Keys com rate limiting por chave.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="f-mark">Q</div>
+        <p style="font-size:15px;font-weight:800;color:#fff;margin-bottom:8px">Cognira Intelligence</p>
+        <p style="font-size:13px;color:rgba(255,255,255,.3);line-height:1.75;max-width:220px">Plataforma de CX Intelligence para mystery shopping, retail audit, contact center IA e pesquisa de mercado.</p>
+      </div>
+      <div>
+        <p class="f-col-title">Soluções</p>
+        <div class="f-col">
+          <a href="/solucoes/mystery-shopping">Mystery Shopping</a>
+          <a href="/solucoes/retail-audit">Retail Audit</a>
+          <a href="/solucoes/contact-center">Contact Center IA</a>
+          <a href="/solucoes/pesquisa-mercado">Pesquisa de Mercado</a>
+        </div>
+      </div>
+      <div>
+        <p class="f-col-title">Plataforma</p>
+        <div class="f-col">
+          <a href="/plataforma">Visão geral</a>
+          <a href="/plataforma">Cognira Intelligence™</a>
+          <a href="/plataforma">Segurança</a>
+          <a href="/landing">Enterprise B2B</a>
+        </div>
+      </div>
+      <div>
+        <p class="f-col-title">Produto</p>
+        <div class="f-col">
+          <a href="/casos-de-uso">Casos de Uso</a>
+          <a href="/login">Entrar</a>
+          <a href="/docs">Documentação</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span>&copy; 2026 Cognira Intelligence &mdash; Todos os direitos reservados</span>
+      <span class="f-badge">Multi-tenant SaaS &middot; RGPD Compliant</span>
+    </div>
+  </div>
+</footer>
+<script src="/site.js"></script>
+</body>
+</html>

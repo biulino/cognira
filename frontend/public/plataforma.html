@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="FastAPI + PostgreSQL 16 + Next.js 14. IA incluída, segurança enterprise, multi-tenant com Row-Level Security."/>
+<title>Plataforma &mdash; Cognira Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="wrap nav-inner">
+    <a href="/home" class="nav-logo">
+      <div class="nav-mark">Q</div>
+      <span class="nav-brand">Cognira</span>
+    </a>
+    <div class="nav-links">
+      <a href="/home">In&iacute;cio</a>
+      <div class="nav-drop">
+        <button class="nav-dropbtn">Solu&ccedil;&otilde;es</button>
+        <div class="nav-dropmenu">
+          <a href="/solucoes/mystery-shopping">&#x1F50D;&thinsp; Mystery Shopping</a>
+          <a href="/solucoes/retail-audit">&#x1F4CA;&thinsp; Retail Audit</a>
+          <a href="/solucoes/contact-center">&#x1F4DE;&thinsp; Contact Center IA</a>
+          <a href="/solucoes/pesquisa-mercado">&#x1F4CB;&thinsp; Pesquisa de Mercado</a>
+        </div>
+      </div>
+      <a href="/casos-de-uso">Casos de Uso</a>
+      <a href="/plataforma" class="active">Plataforma</a>
+      <a href="/landing" class="nav-demo">Demo ao Vivo</a>
+    </div>
+    <div class="nav-actions">
+      <a href="mailto:me@otokura.online" class="btn btn-primary btn-sm">Pedir demonstra&ccedil;&atilde;o</a>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+  <div class="mobile-menu-header">
+    <div style="display:flex;align-items:center;gap:9px">
+      <div class="nav-mark">Q</div>
+      <span class="nav-brand">Cognira</span>
+    </div>
+    <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Fechar menu">&#x2715;</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a href="/home">In&iacute;cio</a>
+    <button class="mm-section-btn" data-target="mm-solucoes">Solu&ccedil;&otilde;es<span class="mm-arrow">&#x203A;</span></button>
+    <div class="mm-section" id="mm-solucoes">
+      <a href="/solucoes/mystery-shopping">&#x1F50D; Mystery Shopping</a>
+      <a href="/solucoes/retail-audit">&#x1F4CA; Retail Audit</a>
+      <a href="/solucoes/contact-center">&#x1F4DE; Contact Center IA</a>
+      <a href="/solucoes/pesquisa-mercado">&#x1F4CB; Pesquisa de Mercado</a>
+    </div>
+    <a href="/casos-de-uso">Casos de Uso</a>
+    <a href="/plataforma" class="active">Plataforma</a>
+    <a href="/landing">Demo ao Vivo</a>
+  </div>
+  <div class="mobile-menu-actions">
+    <a href="mailto:me@otokura.online" class="btn btn-primary">Pedir demonstra&ccedil;&atilde;o</a>
+  </div>
+</div>
+<section class="hero">
+  <div class="wrap hero-1col">
+    <div class="eyebrow" data-ao>Tecnologia</div>
+    <h1 data-ao data-delay="100">Uma arquitectura<br>construída para<br><em>escalar em segurança</em></h1>
+    <p class="hero-desc" data-ao data-delay="150" style="margin:0 auto">FastAPI + PostgreSQL 16 + Next.js 14. Multi-tenant com Row-Level Security, IA embebida e conformidade RGPD por omissão.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:28px" data-ao data-delay="200">
+      <a href="mailto:me@otokura.online" class="btn btn-primary btn-lg">Pedir demonstra&ccedil;&atilde;o</a>
+      <a href="/landing" class="btn btn-outline btn-lg">Opções enterprise</a>
+    </div>
+  </div>
+</section>
+<section class="sec alt">
+  <div class="wrap">
+    <div class="section-head" data-ao>
+      <span class="tag">Stack tecnológico</span>
+      <h2>Construído com tecnologias<br>enterprise comprovadas</h2>
+    </div>
+    <div class="grid g4" data-stagger>
+      <div class="card"><div class="card-icon">&#x26A1;</div><h3>FastAPI async</h3><p>Backend Python assíncrono com tipagem estrita, validação Pydantic e documentação OpenAPI automática.</p></div>
+      <div class="card"><div class="card-icon">&#x1F5C4;</div><h3>PostgreSQL 16</h3><p>Row-Level Security nativo, extensão pgvector para embeddings e isolamento total de dados por tenant.</p></div>
+      <div class="card"><div class="card-icon">&#x1F4BB;</div><h3>Next.js 14</h3><p>App Router, Server Components, Tailwind CSS e PWA com suporte offline para utilização em campo.</p></div>
+      <div class="card"><div class="card-icon">&#x1F9E0;</div><h3>IA incluída</h3><p>IA Cognira proprietária incluída em todos os planos SaaS — sem configuração adicional.</p></div>
+      <div class="card"><div class="card-icon">&#x1F9F9;</div><h3>ClamAV</h3><p>Antivírus embebido que analisa cada ficheiro em upload antes de armazenamento. Rejeição imediata de malware.</p></div>
+      <div class="card"><div class="card-icon">&#x1F433;</div><h3>Docker Compose</h3><p>Deploy reprodutível, escalável e versionado. Migração Alembic incluída no pipeline de CI/CD.</p></div>
+      <div class="card"><div class="card-icon">&#x1F504;</div><h3>Alembic</h3><p>Migrações de base de dados versionadas e automatizadas. Zero downtime em actualizações de schema.</p></div>
+      <div class="card"><div class="card-icon">&#x1F512;</div><h3>Nginx + TLS</h3><p>Reverse proxy com TLS 1.3, headers de segurança OWASP e rate-limiting configurável por rota.</p></div>
+    </div>
+  </div>
+</section>
+<section class="sec dark">
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <span class="tag">Segurança enterprise</span>
+        <h2 style="font-size:clamp(24px,3.5vw,38px);font-weight:900;letter-spacing:-.03em;margin:14px 0 20px;color:#fff">Segurança por camadas,<br>não por afterthought</h2>
+        <p style="font-size:15px;color:rgba(255,255,255,.45);line-height:1.8;margin-bottom:28px">Cada funcionalidade foi desenhada com segurança em primeiro lugar — autenticação, isolamento de dados, validação de ficheiros e conformidade RGPD integrados no núcleo.</p>
+        <a href="/landing" class="btn btn-outline-white">Opções enterprise</a>
+      </div>
+      <div class="dfeat-list">
+        <div class="dfeat"><div class="dfeat-ico">&#x1F510;</div><div><h4>JWT + 2FA TOTP</h4><p>Autenticação stateless com tokens de curta duração e segundo factor via app autenticadora.</p></div></div>
+        <div class="dfeat"><div class="dfeat-ico">&#x1F6E1;</div><div><h4>Row-Level Security</h4><p>Isolamento de dados enforced ao nível do motor de base de dados. Impossível vazar dados entre tenants.</p></div></div>
+        <div class="dfeat"><div class="dfeat-ico">&#x1F464;</div><div><h4>PII e RGPD</h4><p>Dados pessoais encriptados em repouso (AES-128). Política de retenção configurável e suporte a pedidos de acesso RGPD.</p></div></div>
+        <div class="dfeat"><div class="dfeat-ico">&#x1F4CB;</div><div><h4>Audit Log imutável</h4><p>Registo de todas as acções de utilizador com timestamp, IP e payload. Exportável para SIEM.</p></div></div>
+        <div class="dfeat"><div class="dfeat-ico">&#x1F6A6;</div><div><h4>Rate Limiting</h4><p>Limites por endpoint, tenant e IP. Protecção contra brute-force e abuso de API configurável.</p></div></div>
+        <div class="dfeat"><div class="dfeat-ico">&#x1F9F9;</div><div><h4>ClamAV antivírus</h4><p>Análise de cada ficheiro em upload antes de armazenamento. Rejeição imediata de ameaças.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <div class="section-head" data-ao>
+      <span class="tag">Cognira Intelligence™</span>
+      <h2>IA embebida em cada módulo</h2>
+      <p class="sub">Não é um add-on. A inteligência artificial faz parte do núcleo da plataforma — incluída em todos os planos SaaS.</p>
+    </div>
+    <div class="grid g3" data-stagger>
+      <div class="card"><div class="card-icon">&#x1F4F8;</div><h3>Visão computacional</h3><p>Análise de imagens para validação de conformidade visual em visitas de mystery shopping e shelf audit.</p></div>
+      <div class="card"><div class="card-icon">&#x1F3A4;</div><h3>Speech-to-Text</h3><p>Motor de transcrição Cognira em português, espanhol e inglês para avaliação de chamadas de contact center.</p></div>
+      <div class="card"><div class="card-icon">&#x1F4AC;</div><h3>Cognira AI</h3><p>Avaliação de transcrições com rubrica configurável, coaching automático e geração de relatórios narrativos.</p></div>
+      <div class="card"><div class="card-icon">&#x1F9E0;</div><h3>RAG semântico</h3><p>pgvector + embeddings para pesquisa semântica sobre respostas abertas de questionários e histórico de visitas.</p></div>
+      <div class="card"><div class="card-icon">&#x1F9EC;</div><h3>Shelf IA</h3><p>Detecção de rupturas OOS, leitura de códigos EAN/QR e conformidade de planograma em tempo real.</p></div>
+      <div class="card"><div class="card-icon">&#x1F4C8;</div><h3>Benchmarking</h3><p>Comparação automática entre localizações, analistas e períodos com visualização e alertas inteligentes.</p></div>
+    </div>
+  </div>
+</section>
+<section class="sec">
+  <div class="wrap">
+    <div class="section-head" data-ao>
+      <span class="tag">Funcionalidades avançadas</span>
+      <h2>Poder extra em cada plano</h2>
+      <p class="sub">Ferramentas enterprise incluídas sem add-ons, prontas a activar.</p>
+    </div>
+    <div class="grid g4" data-stagger>
+      <div class="card"><div class="card-icon">&#x1F9D9;</div><h3>Wizard de Estudo IA</h3><p>Configuração guiada de estudos por IA — gera estrutura, ondas e formulários a partir de um briefing em linguagem natural.</p></div>
+      <div class="card"><div class="card-icon">&#x1F5FA;</div><h3>Otimização de Rotas</h3><p>Atribuição automática de visitas por proximidade geográfica. Reduz quilometragem e maximiza visitas por analista por dia.</p></div>
+      <div class="card"><div class="card-icon">&#x1F4C2;</div><h3>Ingestão CSV</h3><p>Importação a granel de estabelecimentos, analistas e respostas via CSV validado. Onboarding rápido sem esforço manual.</p></div>
+      <div class="card"><div class="card-icon">&#x1F4AC;</div><h3>Chat Logístico IA</h3><p>Assistente conversacional sobre dados operacionais: perguntas em linguagem natural e sugestões inteligentes de re-atribuição.</p></div>
+      <div class="card"><div class="card-icon">&#x1F3E2;</div><h3>Portal do Cliente</h3><p>Portal white-label para o cliente final acompanhar resultados em tempo real — com login separado e branding personalizável.</p></div>
+      <div class="card"><div class="card-icon">&#x1F4C4;</div><h3>Export Excel + PDF</h3><p>Relatórios profissionais em XLSX e PDF gerados no servidor — incluídos em todos os planos sem add-ons.</p></div>
+      <div class="card"><div class="card-icon">&#x1F4E1;</div><h3>Webhooks HMAC</h3><p>Notificações em tempo real assinadas com HMAC para integração com qualquer sistema externo.</p></div>
+      <div class="card"><div class="card-icon">&#x23F1;</div><h3>Períodos de Refrescamento</h3><p>Período mínimo entre visitas do mesmo analista ao mesmo local — requisito essencial em mystery shopping.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec dark">
+  <div class="wrap">
+    <div class="section-head" data-ao>
+      <span class="tag">APIs e integrações</span>
+      <h2 style="color:#fff">Integra no seu ecossistema</h2>
+    </div>
+    <div class="grid g3" data-stagger>
+      <div class="card dk"><div class="card-icon">&#x1F511;</div><h3>SSO / OIDC</h3><p>Single Sign-On com qualquer identity provider OIDC: Azure AD, Okta, Google Workspace.</p></div>
+      <div class="card dk"><div class="card-icon">&#x2699;</div><h3>REST API completa</h3><p>Todos os recursos disponíveis via API REST com autenticação por API Key ou Bearer token. Docs OpenAPI incluídas.</p></div>
+      <div class="card dk"><div class="card-icon">&#x1F4E1;</div><h3>Webhooks HMAC</h3><p>Notificações em tempo real assinadas com HMAC para os sistemas da organização quando visitas, auditorias ou avaliações mudam de estado.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="wrap">
+    <h2 data-ao>Pronto para ver a plataforma em acção?</h2>
+    <p data-ao data-delay="100">Contacte a nossa equipa para uma demonstração com dados reais no tenant demo.</p>
+    <a href="mailto:me@otokura.online" class="btn btn-ghost btn-lg" data-ao data-delay="200">Contactar vendas</a>
+  </div>
+</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="f-mark">Q</div>
+        <p style="font-size:15px;font-weight:800;color:#fff;margin-bottom:8px">Cognira Intelligence</p>
+        <p style="font-size:13px;color:rgba(255,255,255,.3);line-height:1.75;max-width:220px">Plataforma de CX Intelligence para mystery shopping, retail audit, contact center IA e pesquisa de mercado.</p>
+      </div>
+      <div>
+        <p class="f-col-title">Soluções</p>
+        <div class="f-col">
+          <a href="/solucoes/mystery-shopping">Mystery Shopping</a>
+          <a href="/solucoes/retail-audit">Retail Audit</a>
+          <a href="/solucoes/contact-center">Contact Center IA</a>
+          <a href="/solucoes/pesquisa-mercado">Pesquisa de Mercado</a>
+        </div>
+      </div>
+      <div>
+        <p class="f-col-title">Plataforma</p>
+        <div class="f-col">
+          <a href="/plataforma">Visão geral</a>
+          <a href="/plataforma">Cognira Intelligence™</a>
+          <a href="/plataforma">Segurança</a>
+          <a href="/landing">Enterprise B2B</a>
+        </div>
+      </div>
+      <div>
+        <p class="f-col-title">Produto</p>
+        <div class="f-col">
+          <a href="/casos-de-uso">Casos de Uso</a>
+          <a href="/login">Entrar</a>
+          <a href="/landing">Contactar vendas</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span>&copy; 2026 Cognira Intelligence &mdash; Todos os direitos reservados</span>
+      <span class="f-badge">Multi-tenant SaaS &middot; RGPD Compliant</span>
+    </div>
+  </div>
+</footer>
+<script src="/site.js"></script>
+</body>
+</html>

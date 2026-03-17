@@ -1,0 +1,6 @@
+{
+  "ignore": ["**"],
+  "reportMissingImports": "none",
+  "reportMissingModuleSource": "none",
+  "reportUndefinedVariable": "none"
+}

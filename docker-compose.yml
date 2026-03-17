@@ -1,0 +1,218 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: estudos_mercado
+      POSTGRES_USER: ${POSTGRES_USER:-emercado}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/seeds/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-emercado}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD}
+    volumes:
+      - miniodata:/data
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  clamav:
+    image: clamav/clamav:stable
+    restart: unless-stopped
+    volumes:
+      - clamdata:/var/lib/clamav
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "clamdscan", "--ping", "1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    volumes:
+      - ./backend/app:/app/app:ro
+      - ./backend/alembic:/app/alembic:ro
+      - ./backend/tests:/app/tests:ro
+    networks:
+      - internal
+      - public
+
+  pgbackup:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD:-secret}
+    volumes:
+      - ./backups:/backups
+    entrypoint: >
+      sh -c "while true; do
+        pg_dump -h postgres -U $${POSTGRES_USER:-emercado} $${POSTGRES_DB:-estudos_mercado}
+        | gzip > /backups/backup-$$(date +%Y%m%d-%H%M%S).sql.gz
+        && find /backups -name '*.sql.gz' -mtime +7 -delete;
+        sleep 86400; done"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - internal
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-/api}
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-/api}
+    networks:
+      - public
+
+  coturn:
+    image: coturn/coturn:latest
+    restart: unless-stopped
+    ports:
+      - "3478:3478"
+      - "3478:3478/udp"
+      - "49152-49200:49152-49200/udp"
+    command: >
+      -n
+      --log-file=stdout
+      --min-port=49152
+      --max-port=49200
+      --use-auth-secret
+      --static-auth-secret=${TURN_SECRET:-changeme-turn-secret-replace-in-prod}
+      --realm=cx.local
+      --no-tls
+      --no-dtls
+    networks:
+      - public
+
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${HTTP_PORT:-80}:80"
+      - "127.0.0.1:${HTTPS_PORT:-443}:443"
+    volumes:
+      - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./infra/nginx/certs:/etc/nginx/certs:ro
+      - ./infra/nginx/.htpasswd:/etc/nginx/.htpasswd:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - public
+      - internal
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OPTIONAL — Authentik SSO Identity Provider
+# Uncomment all lines below to run a self-hosted OIDC/SAML IdP alongside the app.
+#
+# Quick-start:
+#   1. Uncomment the three services and the authentikdata volume
+#   2. Set AUTHENTIK_SECRET_KEY to a long random string in your .env
+#   3. docker compose up -d authentik-redis authentik-server authentik-worker
+#   4. Visit http://<server>:9000/if/flow/initial-setup/ to create the admin user
+#   5. In Authentik UI: Providers → Create → OAuth2/OIDC → set Redirect URI to
+#        https://<app-host>/api/auth/sso/callback
+#   6. Copy Client ID/Secret into .env SSO_CLIENT_ID / SSO_CLIENT_SECRET
+#   7. Set SSO_ENABLED=true and fill SSO_AUTH_URL / SSO_TOKEN_URL etc.
+#   8. docker compose up -d backend  (picks up new env vars)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+#  authentik-redis:
+#    image: redis:alpine
+#    restart: unless-stopped
+#    healthcheck:
+#      test: ["CMD", "redis-cli", "ping"]
+#    networks:
+#      - internal
+
+#  authentik-server:
+#    image: ghcr.io/goauthentik/server:2024.12
+#    restart: unless-stopped
+#    command: server
+#    environment:
+#      AUTHENTIK_REDIS__HOST: authentik-redis
+#      AUTHENTIK_POSTGRESQL__HOST: postgres
+#      AUTHENTIK_POSTGRESQL__NAME: ${POSTGRES_DB:-estudos}
+#      AUTHENTIK_POSTGRESQL__USER: ${POSTGRES_USER:-estudos}
+#      AUTHENTIK_POSTGRESQL__PASSWORD: ${POSTGRES_PASSWORD:-estudos}
+#      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:-changeme-use-a-long-random-string}
+#    ports:
+#      - "9000:9000"
+#    depends_on:
+#      - postgres
+#      - authentik-redis
+#    volumes:
+#      - authentikdata:/media
+#    networks:
+#      - internal
+#      - public
+
+#  authentik-worker:
+#    image: ghcr.io/goauthentik/server:2024.12
+#    restart: unless-stopped
+#    command: worker
+#    environment:
+#      AUTHENTIK_REDIS__HOST: authentik-redis
+#      AUTHENTIK_POSTGRESQL__HOST: postgres
+#      AUTHENTIK_POSTGRESQL__NAME: ${POSTGRES_DB:-estudos}
+#      AUTHENTIK_POSTGRESQL__USER: ${POSTGRES_USER:-estudos}
+#      AUTHENTIK_POSTGRESQL__PASSWORD: ${POSTGRES_PASSWORD:-estudos}
+#      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:-changeme-use-a-long-random-string}
+#    depends_on:
+#      - postgres
+#      - authentik-redis
+#    volumes:
+#      - authentikdata:/media
+#    networks:
+#      - internal
+
+volumes:
+  pgdata:
+  miniodata:
+  clamdata:
+#  authentikdata:     # uncomment when using Authentik
+
+networks:
+  internal:
+    internal: true
+  public:

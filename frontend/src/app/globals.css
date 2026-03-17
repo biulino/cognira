@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #F9F9F9;
+  --foreground: #111111;
+  --sidebar: #ffffff;
+  --card: #ffffff;
+  --border: #E8E8E8;
+  --muted: #888888;
+  --brand: #FF3300;
+  --brand-dark: #CC2200;
+  --brand-faint: #FFF5F3;
+  /* White-label — overridden at runtime by ThemeProvider */
+  --brand-primary: #1E40AF;
+  --brand-secondary: #3B82F6;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 99px;
+}
+
+/* Focus ring utility */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-[#FF3300] focus:ring-offset-1;
+}
+
+/* Allow selection in form inputs and text areas (when anti-copy is active) */
+input, textarea, [contenteditable="true"], pre, code {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}

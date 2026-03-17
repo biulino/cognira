@@ -1,0 +1,54 @@
+# ── Secrets / environment ──────────────────────────────
+.env
+.env.local
+.env.production
+.env.*.local
+
+# ── Python ─────────────────────────────────────────────
+*.pyc
+*.pyo
+__pycache__/
+.venv/
+venv/
+dist/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Node / Next.js ─────────────────────────────────────
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# ── Docker ─────────────────────────────────────────────
+infra/nginx/certs/*.pem
+infra/nginx/certs/*.key
+infra/nginx/certs/*.crt
+infra/nginx/certs/*.csr
+
+# ── Logs & temp ────────────────────────────────────────
+*.log
+/tmp/
+*.tmp
+*.swp
+*.swo
+
+# ── OS ─────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── IDE ────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.code-workspace
+
+# ── Test results ───────────────────────────────────────
+e2e/test-results/
+htmlcov/
+.coverage
+
+# ── Alembic generated (keep versions tracked) ──────────
+# alembic/versions/ — intentionally tracked
+

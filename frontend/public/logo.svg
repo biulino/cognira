@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 44" fill="none" aria-label="Cognira">
+  <!-- Mark: aperture / signal capture -->
+  <!-- Ghost outer ring -->
+  <circle cx="22" cy="22" r="20" stroke="#2D6BEE" stroke-width="1" fill="none" opacity="0.18"/>
+  <!-- Main 270° arc opening upper-right (C-form rotated) -->
+  <!-- Center (22,22) r=15 — start at 315° (upper-right), end at 45° (lower-right), 270° sweep going left -->
+  <!-- 315° → (22+10.61, 22-10.61) = (32.61, 11.39) -->
+  <!--  45° → (22+10.61, 22+10.61) = (32.61, 32.61) -->
+  <path d="M 32.61 11.39 A 15 15 0 1 0 32.61 32.61" stroke="#2D6BEE" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <!-- Data pulse dot at arc opening (upper tip) -->
+  <circle cx="32.61" cy="11.39" r="3.5" fill="#2D6BEE"/>
+  <!-- Subtle inner ring -->
+  <circle cx="22" cy="22" r="7" stroke="#0F1B3D" stroke-width="1.5" fill="none" opacity="0.12"/>
+  <!-- Core node (insight) -->
+  <circle cx="22" cy="22" r="4.5" fill="#0F1B3D"/>
+  <!-- Core shimmer highlight -->
+  <circle cx="20.6" cy="20.6" r="1.8" fill="#2D6BEE" opacity="0.85"/>
+  <!-- Wordmark: Cognira -->
+  <text x="52" y="31"
+    font-family="'Inter', 'Segoe UI', system-ui, sans-serif"
+    font-size="22"
+    font-weight="800"
+    letter-spacing="-0.7"
+    fill="#0F1B3D">Cogn<tspan fill="#2D6BEE">ira</tspan></text>
+</svg>

@@ -1,0 +1,118 @@
+import uuid
+from datetime import datetime
+from typing import Optional, List
+
+from sqlalchemy import (
+    String, Boolean, Integer, ForeignKey, DateTime, Numeric, Text,
+    Index, func,
+)
+from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from app.models.base import Base, TimestampMixin
+
+
+class Visita(Base):
+    __tablename__ = "visitas"
+    __table_args__ = (
+        Index("ix_visitas_estudo_estado", "estudo_id", "estado"),
+        Index("ix_visitas_analista", "analista_id"),
+        Index("ix_visitas_estabelecimento", "estabelecimento_id"),
+        Index("ix_visitas_planeada_em", "planeada_em"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    estudo_id: Mapped[int] = mapped_column(ForeignKey("estudos.id"), nullable=False)
+    analista_id: Mapped[Optional[int]] = mapped_column(ForeignKey("analistas.id"), nullable=True)
+    estabelecimento_id: Mapped[int] = mapped_column(ForeignKey("estabelecimentos.id"), nullable=False)
+    onda_id: Mapped[Optional[int]] = mapped_column(ForeignKey("ondas.id"), nullable=True)
+
+    estado: Mapped[str] = mapped_column(String(30), nullable=False, default="nova")
+    # nova/planeada/inserida/corrigir/corrigir_email/corrigida/validada/fechada
+    # para_alteracao/situacao_especial/sem_alteracoes/anulada
+
+    motivo_anulacao: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+    tipo_visita: Mapped[str] = mapped_column(String(30), default="normal")
+    # normal/extra/presencial/drive_through/telefonica/auditoria/digital
+
+    # FK to the specific evaluation grid used for this visit
+    grelha_id: Mapped[Optional[int]] = mapped_column(ForeignKey("grelhas.id"), nullable=True)
+
+    planeada_em: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    realizada_inicio: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    realizada_fim: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    inserida_em: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    validada_em: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+    validador_id: Mapped[Optional[uuid.UUID]] = mapped_column(ForeignKey("utilizadores.id"), nullable=True)
+
+    pontuacao: Mapped[Optional[float]] = mapped_column(Numeric(5, 2), nullable=True)
+    pontuacao_estado: Mapped[str] = mapped_column(
+        String(20), default="nao_avaliada"
+    )  # calculada/nao_avaliada/nao_aplicavel
+
+    # Cognira IA — validation result stored automatically on inserida transition
+    ia_veredicto: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
+    ia_mensagem: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    ia_critica_em: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    latitude: Mapped[Optional[float]] = mapped_column(Numeric(10, 7), nullable=True)
+    longitude: Mapped[Optional[float]] = mapped_column(Numeric(10, 7), nullable=True)
+    activo: Mapped[bool] = mapped_column(Boolean, default=True)
+
+    # Wave 5.5 — Shelf Audit AI analysis result
+    shelf_ia_analise: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    shelf_ia_em: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    # Wave 6.3 — GPS proof-of-presence (recorded when analista starts visit)
+    gps_checkin_lat: Mapped[Optional[float]] = mapped_column(Numeric(10, 7), nullable=True)
+    gps_checkin_lon: Mapped[Optional[float]] = mapped_column(Numeric(10, 7), nullable=True)
+    gps_checkin_em: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    # relationships
+    campos: Mapped[List["CampoVisita"]] = relationship(back_populates="visita", lazy="selectin")
+    fotos: Mapped[List["FotoVisita"]] = relationship(back_populates="visita", lazy="selectin")
+    respostas: Mapped[List["RespostaVisita"]] = relationship(back_populates="visita", lazy="selectin")
+    mensagens: Mapped[List["MensagemVisita"]] = relationship(back_populates="visita", lazy="selectin")
+    candidaturas: Mapped[List["CandidaturaVisita"]] = relationship(back_populates="visita", lazy="selectin")
+    planos_acao: Mapped[List["PlanoAcao"]] = relationship(back_populates="visita", lazy="selectin")
+
+
+class CampoVisita(Base):
+    __tablename__ = "campos_visita"
+    __table_args__ = (
+        Index("ix_campos_visita_visita_chave", "visita_id", "chave"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    visita_id: Mapped[int] = mapped_column(ForeignKey("visitas.id"), nullable=False)
+    chave: Mapped[str] = mapped_column(String(100), nullable=False)
+    valor: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+
+    visita: Mapped["Visita"] = relationship(back_populates="campos")
+
+
+class CaracterizacaoCache(Base):
+    """Generated by PostgreSQL trigger from campos_visita."""
+    __tablename__ = "caracterizacao_cache"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    visita_id: Mapped[int] = mapped_column(ForeignKey("visitas.id"), unique=True, nullable=False)
+    dados: Mapped[Optional[dict]] = mapped_column(JSONB, nullable=True)
+
+
+class CandidaturaVisita(Base):
+    __tablename__ = "candidaturas_visita"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    analista_id: Mapped[int] = mapped_column(ForeignKey("analistas.id"), nullable=False)
+    visita_id: Mapped[int] = mapped_column(ForeignKey("visitas.id"), nullable=False)
+    estado: Mapped[str] = mapped_column(String(20), default="pendente")  # pendente/aceite/rejeitada
+
+    visita: Mapped["Visita"] = relationship(back_populates="candidaturas")
+
+
+# forward refs
+from app.models.photo import FotoVisita  # noqa: E402, F401
+from app.models.evaluation import RespostaVisita  # noqa: E402, F401
+from app.models.message import MensagemVisita  # noqa: E402, F401
+from app.models.action import PlanoAcao  # noqa: E402, F401

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sem Ligação — Cognira</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #F9FAFB;
+      color: #111111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      text-align: center;
+    }
+    .icon {
+      width: 80px;
+      height: 80px;
+      background: #FFF0ED;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    p  { color: #666; font-size: 0.9rem; line-height: 1.6; max-width: 320px; }
+    button {
+      margin-top: 2rem;
+      padding: 0.75rem 2rem;
+      background: #2D6BEE;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover { background: #1A52CC; }
+    .logo { font-size: 1.75rem; font-weight: 800; color: #2D6BEE; margin-bottom: 2rem; }
+  </style>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+  <div class="logo">Cognira</div>
+  <div class="icon">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2D6BEE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="1" y1="1" x2="23" y2="23"/>
+      <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+      <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+      <path d="M10.71 5.05A16 16 0 0 1 22.56 9"/>
+      <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+      <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+      <line x1="12" y1="20" x2="12.01" y2="20"/>
+    </svg>
+  </div>
+  <h1>Sem Ligação à Internet</h1>
+  <p>Não foi possível carregar esta página.<br/>Verifique a sua ligação e tente novamente.<br/>Os dados já guardados continuam acessíveis.</p>
+  <button onclick="window.location.reload()">Tentar Novamente</button>
+</body>
+</html>
