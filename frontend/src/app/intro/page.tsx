@@ -247,7 +247,7 @@ export default function IntroPage() {
         </div>
 
         <p className="text-center text-xs text-slate-400">
-          URL: <span className="font-mono text-slate-600">https://q21.otokura.online</span> &nbsp;·&nbsp; Tenant Demo: <span className="font-mono text-slate-600">Cognira Demo</span>
+          URL: <span className="font-mono text-slate-600">https://otokura.online</span> &nbsp;·&nbsp; Tenant Demo: <span className="font-mono text-slate-600">Cognira Demo</span>
         </p>
       </section>
 

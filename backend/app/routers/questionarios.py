@@ -235,7 +235,7 @@ async def enviar_por_email(
             detail="SMTP não configurado. Vai a Configurações → Sistema e define smtp_host, smtp_user e smtp_password.",
         )
 
-    base_url = cfg.get("app_url", "https://q21.otokura.online")
+    base_url = cfg.get("app_url", "https://otokura.online")
     survey_url = f"{base_url}/questionarios/{qid}/responder"
 
     assunto = body.assunto or f"Questionário: {q.nome}"

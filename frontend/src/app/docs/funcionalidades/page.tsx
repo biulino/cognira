@@ -365,7 +365,7 @@ export default function FuncionalidadesPage() {
         </ul>
         <div className="bg-slate-900 rounded-xl px-4 py-2.5 font-mono text-xs text-slate-300 mt-3">
           <span className="text-emerald-400 font-bold">OIDC_ISSUER</span>
-          {" = "}<span className="text-slate-400">https://auth.empresa.com/realms/q21</span>
+          {" = "}<span className="text-slate-400">https://auth.empresa.com/realms/cognira</span>
         </div>
       </FeatureCard>
 

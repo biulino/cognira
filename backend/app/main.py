@@ -28,6 +28,11 @@ async def lifespan(app: FastAPI):
         if _is_prod:
             raise RuntimeError(f"FATAL: {msg}. Generate one with: python3 -c \"from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())\"")
         print(f"[security] WARNING: {msg}. Change it before deploying.", flush=True)
+    if _settings.license_signing_key == "cognira-dev-signing-key":
+        msg = "LICENSE_SIGNING_KEY is using the public dev default — anyone with the source code can forge a Pro licence"
+        if _is_prod:
+            raise RuntimeError(f"FATAL: {msg}. Set a unique secret via LICENSE_SIGNING_KEY env var.")
+        print(f"[security] WARNING: {msg}. Set LICENSE_SIGNING_KEY before deploying Pro.", flush=True)
     # Sentry error tracking (no-op if SENTRY_DSN is not set)
     if _settings.sentry_dsn:
         try:

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-const DB_NAME = "q21-offline";
+const DB_NAME = "cognira-offline";
 const DB_VERSION = 2; // bump when adding new stores
 const DRAFT_STORE = "visits-drafts";
 

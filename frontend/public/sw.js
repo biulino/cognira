@@ -4,7 +4,7 @@ const CACHE_VERSION = "v6";
 const STATIC_CACHE  = `estudos-static-${CACHE_VERSION}`;
 const API_CACHE     = `estudos-api-${CACHE_VERSION}`;
 const ALL_CACHES    = [STATIC_CACHE, API_CACHE];
-const OFFLINE_DB    = "q21-offline";
+const OFFLINE_DB    = "cognira-offline";
 const OFFLINE_STORE = "pending-uploads";
 const DRAFT_STORE   = "visits-drafts";
 

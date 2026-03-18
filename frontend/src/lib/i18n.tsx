@@ -51,12 +51,12 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("q21_locale") as Locale;
+      const saved = localStorage.getItem("cognira_locale") as Locale;
       if (saved && (LOCALES as string[]).includes(saved)) {
         setLocaleState(saved);
       } else if (saved && !(LOCALES as string[]).includes(saved)) {
         // Unsupported locale stored — reset to PT
-        localStorage.setItem("q21_locale", "pt");
+        localStorage.setItem("cognira_locale", "pt");
         setLocaleState("pt");
       }
     } catch {
@@ -67,7 +67,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const setLocale = (l: Locale) => {
     setLocaleState(l);
     try {
-      localStorage.setItem("q21_locale", l);
+      localStorage.setItem("cognira_locale", l);
     } catch { /* ignore */ }
   };
 

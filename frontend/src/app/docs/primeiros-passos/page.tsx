@@ -63,7 +63,7 @@ export default function PrimeirosPassosPage() {
           <Globe className="w-5 h-5 text-blue-500 flex-shrink-0" />
           <div>
             <p className="text-xs text-slate-400 mb-0.5">URL da plataforma</p>
-            <p className="font-mono font-semibold text-slate-900 text-sm">https://q21.otokura.online</p>
+            <p className="font-mono font-semibold text-slate-900 text-sm">https://otokura.online</p>
           </div>
         </div>
         <Tip>Guardar o endereço nos favoritos do browser para acesso rápido.</Tip>
