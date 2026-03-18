@@ -2,9 +2,16 @@
   <img src="frontend/public/logo.svg" alt="Cognira" width="220" />
 </p>
 
+<h2 align="center">Turn every field visit, shelf scan, and customer call into a strategic advantage.</h2>
+
 <p align="center">
-  <strong>CX Intelligence Platform</strong><br/>
-  Field studies · AI visit validation · Shelf audit · RAG · Call centre · Planogram · Real-time WebRTC
+  Cognira is an AI-powered CX Intelligence Platform that gives consumer-goods brands, market-research agencies, and field-force operators a single command centre — from questionnaire design to GPT-4o–generated executive reports, planogram compliance, and real-time analyst coaching.
+</p>
+
+<p align="center">
+  <a href="https://otokura.online"><strong>🌐 Website</strong></a> &nbsp;·&nbsp;
+  <a href="mailto:me@otokura.online"><strong>✉️ Get a Pro Licence</strong></a> &nbsp;·&nbsp;
+  <a href="#quick-start"><strong>⚡ Quick Start (5 min)</strong></a>
 </p>
 
 <p align="center">
@@ -13,52 +20,173 @@
   <img src="https://img.shields.io/badge/python-3.12-blue" alt="Python 3.12"/>
   <img src="https://img.shields.io/badge/next.js-14-black" alt="Next.js 14"/>
   <img src="https://img.shields.io/badge/postgres-16+pgvector-336791" alt="PostgreSQL 16"/>
-  <a href="mailto:me@otokura.online"><img src="https://img.shields.io/badge/contact-me%40otokura.online-informational" alt="Contact"/></a>
+  <img src="https://img.shields.io/badge/AI-GPT--4o%20%7C%20Whisper%20%7C%20Embeddings-orange" alt="AI"/>
 </p>
 
 ---
 
 ## Table of Contents
 
-1. [Overview](#overview)
-2. [Architecture](#architecture)
-3. [Feature Matrix — Community vs Pro](#feature-matrix--community-vs-pro)
-4. [AI Modules](#ai-modules)
-5. [API Reference](#api-reference)
-6. [Roles & Permissions](#roles--permissions)
-7. [Quick Start](#quick-start)
-8. [Configuration Reference](#configuration-reference)
-9. [Database](#database)
-10. [Development](#development)
-11. [Testing](#testing)
-12. [Deployment](#deployment)
-13. [Security](#security)
-14. [Licensing & Commercial Use](#licensing--commercial-use)
-15. [Contributing](#contributing)
+1. [Why Cognira?](#why-cognira)
+2. [Who Uses Cognira?](#who-uses-cognira)
+3. [Use Cases](#use-cases)
+4. [Platform Overview](#platform-overview)
+5. [Architecture](#architecture)
+6. [Feature Matrix — Community vs Pro](#feature-matrix--community-vs-pro)
+7. [AI Modules](#ai-modules)
+8. [API Reference](#api-reference)
+9. [Roles & Permissions](#roles--permissions)
+10. [Quick Start](#quick-start)
+11. [Configuration Reference](#configuration-reference)
+12. [Database](#database)
+13. [Development](#development)
+14. [Testing](#testing)
+15. [Deployment](#deployment)
+16. [Security](#security)
+17. [Licensing & Commercial Use](#licensing--commercial-use)
+18. [Contributing](#contributing)
 
 ---
 
-## Overview
+## Why Cognira?
 
-**Cognira** is an open-core SaaS platform built for consumer-goods companies, market-research agencies, and field-force operators. It manages the full lifecycle of field studies: questionnaire design, visit scheduling, on-site data capture, AI-powered quality control, client reporting, and operational analytics.
+Field-force and CX operations teams lose revenue every day to three silent killers:
 
-### Core capabilities
+- **Invisible quality problems** — supervisors can't manually review hundreds of visit photos, shelf scans, or call recordings in time to act.
+- **Data silos** — visit data, planogram photos, call-centre recordings, and analyst performance metrics live in separate tools, so insights arrive too late.
+- **Manual reporting bottlenecks** — coordinators spend days writing the same executive report that Cognira generates in seconds.
 
-| Domain | What it does |
+Cognira eliminates all three.
+
+| Before Cognira | With Cognira |
 |---|---|
-| **Studies & Waves** | Create research studies with configurable evaluation grids, assign fieldwork waves, plan visit quotas |
-| **Visit Management** | Full state-machine lifecycle (draft → submitted → validated → approved/rejected), GPS check-in, barcode scan |
-| **Questionnaires** | Multi-language questionnaires (PT/EN/ES/FR) with branching logic, public survey links, offline-capable |
-| **Photo AI** | GPT-4o Vision analysis of visit photos — compliance verdicts, automatic flagging |
-| **Shelf Audit** | EAN/QR barcode scanning, facing counts, planogram comparison, AI deviation analysis |
-| **Call Centre** | Whisper STT audio transcription + GPT scoring against evaluation templates |
-| **RAG Search** | Semantic search over ingested study documents (pgvector embeddings) |
-| **AI Agent** | Conversational chat agent with tool use for logistics, data queries, and planning |
-| **Analyst Scoring** | Predictive quality scores, anomaly detection, personalised AI coaching |
-| **Client Portal** | White-label portal per client with SLA dashboard, custom branding/domain |
-| **Internal Chat** | Real-time team messaging with WebRTC P2P voice calls (coturn TURN) |
-| **Webhooks & API** | External REST API with API-key auth, webhook subscriptions for events |
-| **Multi-tenancy** | Full tenant isolation at DB level, per-tenant plans & module gating |
+| Manual photo review — 2-3 days per wave | GPT-4o Vision flags non-compliant photos in seconds |
+| Shelf gaps discovered during monthly review | Real-time facing counts + planogram deviation alerts |
+| QA team listens to call recordings by hand | Whisper STT + GPT scorecard extraction — automated |
+| Analyst performance judged by gut feel | Predictive quality scores + personalised AI coaching |
+| Report takes a coordinator 3-5 days to write | Full narrative executive report generated on demand |
+| One portal per client — bespoke dev needed | White-label multi-tenant portal — configured, not coded |
+
+> **Bottom line:** Cognira gives your team the analytical depth of a data-science department, deployed in an afternoon.
+
+---
+
+## Who Uses Cognira?
+
+### Consumer-Goods Brands & Manufacturers
+FMCG and CPG companies use Cognira to enforce in-store execution standards across hundreds of points of sale. The shelf-audit module captures facing counts, detects planogram deviations, and delivers AI-generated compliance reports — giving trade and category managers instant visibility where promotions are breaking down.
+
+### Market Research & Field Agencies
+Research agencies running continuous trackers, mystery shopping programmes, or brand-health studies use Cognira to manage the full fieldwork lifecycle. Multi-language questionnaires, GPS-verified visits, automated QC, and white-label client portals let agencies serve more clients with the same headcount.
+
+### Retail & Telecom Operators
+Companies operating large field-sales or service teams use Cognira's call-centre AI to score agent performance against evaluation templates — automatically. The analyst-coaching module then delivers personalised development plans, cutting training cycles from weeks to days.
+
+### Research & Consulting Firms
+Strategy and CX consultancies use Cognira's RAG search and AI agent to help analysts interrogate large bodies of study documents conversationally, cutting research synthesis time from hours to minutes.
+
+---
+
+## Use Cases
+
+### 1. In-Store Execution & Shelf Compliance
+
+> *"Our trade marketing team needed to know within 24 hours whether shelf space was placed correctly after a major campaign launch."*
+
+**How Cognira solves it:**
+- Field analysts visit stores and upload shelf photos via mobile
+- ClamAV-scanned photos are stored in MinIO and analysed by GPT-4o Vision
+- AI returns facing counts, gap detections, and a planogram compliance score
+- Deviations trigger webhook notifications to the client's ERP or project management tool
+- The trade team sees a real-time compliance dashboard without waiting for the weekly report
+
+---
+
+### 2. Mystery Shopping & Visit Quality Management
+
+> *"We manage 800 mystery shoppers across 5 countries. Our validation team couldn't scale manually."*
+
+**How Cognira solves it:**
+- Multi-language questionnaires (PT/EN/ES/FR) guide shoppers through standardised evaluations
+- Visit state machine enforces the review workflow (draft → submitted → validated → approved)
+- AI auto-QC flags inconsistent or suspicious responses before they reach the validator
+- AI validation module analyses the full visit and recommends a verdict with a rationale
+- Coordinators see an anomaly dashboard identifying analysts whose patterns fall outside norms
+- Predictive scoring surfaces at-risk analysts 30–60 days before quality drops become visible
+
+---
+
+### 3. Call Centre Quality Assurance
+
+> *"We were scoring 10% of calls because the rest took too long to review. We were flying blind."*
+
+**How Cognira solves it:**
+- Agents or supervisors upload MP3/WAV recordings to the call-centre module
+- Whisper STT produces a full transcript in seconds
+- GPT-4o scores the call against a configurable evaluation template (greeting, empathy, resolution, compliance, etc.)
+- Structured scorecard results are stored and exportable to Excel
+- Managers see aggregate quality trends per team, per period, per template — no manual work required
+
+---
+
+### 4. Brand-Health & Continuous Tracking Studies
+
+> *"Our clients want on-demand dashboards, not a quarterly PDF nobody reads."*
+
+**How Cognira solves it:**
+- Studies and waves are configured with multi-dimensional evaluation grids
+- Public survey links collect responses without requiring respondents to log in
+- Sentiment analysis and word-cloud extraction surface qualitative themes from open-text responses
+- Wave-over-wave temporal comparison shows trend direction automatically
+- White-label client portals give each client branded access to their own SLA dashboard and report centre
+- AI report generation produces a full narrative executive summary at the click of a button
+
+---
+
+### 5. Field Logistics & AI-Assisted Planning
+
+> *"Assigning 400 visits to 60 analysts across 12 regions was a two-day spreadsheet exercise."*
+
+**How Cognira solves it:**
+- The AI planning module generates an optimal visit assignment plan for a whole wave in one call
+- The conversational AI agent can answer logistics questions ("Which analysts are available in Porto next week?") and execute assignment actions directly
+- GPS check-in validates that analysts are physically at the right location before they can submit
+
+---
+
+### 6. Reseller & White-Label SaaS
+
+> *"We want to offer our own branded platform to clients without rebuilding from scratch."*
+
+**How Cognira solves it:**
+- Full multi-tenancy with DB-level isolation — each client is a separate tenant with their own data, users, and plan
+- Per-tenant branding (logo, primary colour, domain) via the branding API
+- Granular module gating — enable only the features each client has purchased
+- The superadmin panel tracks MRR, active tenants, and plan subscriptions
+- SSO/SAML 2.0 lets enterprise clients connect their existing identity provider
+- REST API + webhooks let you embed Cognira data into your own products
+
+---
+
+## Platform Overview
+
+**Cognira** is an open-core platform built for the full lifecycle of field intelligence: study design, visit execution, AI-powered quality assurance, and client reporting. It runs entirely on your infrastructure — on-prem, private cloud, or any VPS — with a single `docker compose up`.
+
+| Domain | Capability |
+|---|---|
+| **Studies & Waves** | Configurable evaluation grids, visit-quota planning, wave management |
+| **Visit Management** | Full state-machine lifecycle (draft → submitted → validated → approved), GPS check-in, barcode scan |
+| **Questionnaires** | Multi-language (PT/EN/ES/FR), branching logic, public survey URLs, offline-capable |
+| **Photo AI** | GPT-4o Vision analysis — compliance verdicts, gap detection, automatic flagging |
+| **Shelf Audit** | EAN/QR barcode scanning, facing counts, planogram diff, AI deviation report |
+| **Call Centre AI** | Whisper STT transcription + GPT scorecard extraction against evaluation templates |
+| **RAG Search** | Semantic search over ingested study documents (pgvector, text-embedding-3-small) |
+| **AI Agent** | Conversational interface with tool use — logistics, data queries, wave planning |
+| **Analyst Intelligence** | Predictive quality scores, anomaly detection, personalised AI coaching |
+| **Client Portal** | White-label portal per client — SLA dashboard, custom branding, domain |
+| **Internal Comms** | Real-time messaging + WebRTC P2P voice calls (coturn TURN) |
+| **Webhooks & API** | External REST API with API-key auth, signed webhook subscriptions |
+| **Multi-tenancy** | Full tenant isolation at DB level, per-tenant plans and module gating |
 | **SSO / SAML 2.0** | Authentik, Keycloak, Azure AD, Google Workspace |
 
 ---
@@ -104,6 +232,8 @@ Nginx 1.27 (reverse proxy, TLS termination)
 
 ## Feature Matrix — Community vs Pro
 
+Cognira ships in two editions. **Community** is free forever for non-commercial use. **Pro** unlocks every AI module, multi-tenancy, and enterprise integrations — and is the edition you need to run Cognira as a commercial product or SaaS.
+
 Set `EDITION=community` (default) or `EDITION=pro` in your `.env`. Pro requires a valid `COGNIRA_LICENSE_KEY`.
 
 | Feature | Community | Pro |
@@ -115,34 +245,38 @@ Set `EDITION=community` (default) or `EDITION=pro` in your `.env`. Pro requires 
 | Internal chat (text) | ✅ | ✅ |
 | Client portal (basic) | ✅ | ✅ |
 | REST API (read-only) | ✅ | ✅ |
-| **Photo AI analysis (GPT-4o Vision)** | ❌ | ✅ |
+| **Photo AI — GPT-4o Vision compliance verdicts** | ❌ | ✅ |
 | **AI visit validation & auto-QC** | ❌ | ✅ |
-| **AI visit planning** | ❌ | ✅ |
-| **AI narrative report generation** | ❌ | ✅ |
-| **AI insights, word cloud, sentiment** | ❌ | ✅ |
-| **Analyst predictive scoring** | ❌ | ✅ |
+| **AI wave planning — optimal analyst assignment** | ❌ | ✅ |
+| **AI narrative report generation (EN/PT)** | ❌ | ✅ |
+| **AI insights, word cloud, sentiment analysis** | ❌ | ✅ |
+| **Analyst predictive quality scoring (90-day)** | ❌ | ✅ |
 | **Analyst anomaly detection** | ❌ | ✅ |
-| **AI personalised coaching** | ❌ | ✅ |
-| **Call centre (Whisper + GPT scoring)** | ❌ | ✅ |
-| **Shelf audit AI analysis** | ❌ | ✅ |
-| **Planogram AI comparison** | ❌ | ✅ |
-| **RAG semantic search** | ❌ | ✅ |
-| **AI agent (conversational)** | ❌ | ✅ |
-| **Multi-tenancy** | ❌ | ✅ |
-| **White-label branding per tenant** | ❌ | ✅ |
-| **API keys & webhooks** | ❌ | ✅ |
-| **SSO / SAML 2.0** | ❌ | ✅ |
+| **AI personalised coaching plans** | ❌ | ✅ |
+| **Call centre — Whisper STT + GPT scorecards** | ❌ | ✅ |
+| **Shelf audit AI — facings, gaps, compliance** | ❌ | ✅ |
+| **Planogram AI comparison (Vision diff)** | ❌ | ✅ |
+| **RAG semantic search over study documents** | ❌ | ✅ |
+| **AI agent — conversational logistics & planning** | ❌ | ✅ |
+| **Multi-tenancy — full DB-level isolation** | ❌ | ✅ |
+| **White-label branding & domain per tenant** | ❌ | ✅ |
+| **API keys & signed webhooks** | ❌ | ✅ |
+| **SSO / SAML 2.0 (Azure AD, Keycloak, Authentik)** | ❌ | ✅ |
 | **Web push notifications** | ❌ | ✅ |
-| **Superadmin panel** | ❌ | ✅ |
-| **WebRTC P2P voice calls** | ❌ | ✅ |
+| **Superadmin panel — MRR, tenants, plans** | ❌ | ✅ |
+| **WebRTC P2P voice calls (coturn TURN)** | ❌ | ✅ |
 
-> **Upgrade / get a licence key:** [me@otokura.online](mailto:me@otokura.online)
+> ### Ready to unlock Pro?
+> Contact **[me@otokura.online](mailto:me@otokura.online)** or visit **[otokura.online](https://otokura.online)** to get your licence key.
+> Licences are per-deployment with no per-seat fees. One key, unlimited users.
 
 ---
 
 ## AI Modules
 
-All AI features require `EDITION=pro` and a valid `OPENAI_API_KEY`. Endpoints return HTTP `402 Payment Required` when called on `community` edition.
+Cognira ships **18 AI modules** powered by the OpenAI platform. Each module is independently gated — you can enable exactly the capabilities your deployment needs. All AI features require `EDITION=pro`, a valid `COGNIRA_LICENSE_KEY`, and an `OPENAI_API_KEY`. Unlicensed calls return HTTP `402 Payment Required`, making it safe to open-source the codebase without giving away commercial value.
+
+All models are configurable via the AI-provider settings — swap to Azure OpenAI, a self-hosted endpoint, or any OpenAI-compatible API.
 
 | Module | Endpoint | Model | Description |
 |---|---|---|---|
@@ -671,22 +805,30 @@ Please report security issues by email to [me@otokura.online](mailto:me@otokura.
 
 ## Licensing & Commercial Use
 
-Cognira is released under the **Business Source License 1.1 (BUSL-1.1)**.
+Cognira is released under the **Business Source License 1.1 (BUSL-1.1)**. The model is designed to be transparent: the full source code is available to read, audit, and self-host — but commercial deployment requires a licence.
 
 | Use case | Allowed? |
 |---|---|
 | Personal / hobby projects | ✅ Free |
 | Academic research | ✅ Free |
 | Non-profit organisations | ✅ Free |
-| Internal tooling (not sold to customers) | ✅ Free |
-| Running as a commercial SaaS / charging end-users | ❌ Requires licence |
-| Embedding in a commercial product | ❌ Requires licence |
+| Internal tooling (not sold to, or operated for, customers) | ✅ Free |
+| Running as a commercial SaaS — charging end-users | ❌ Requires Pro licence |
+| Embedding in a commercial product or agency service | ❌ Requires Pro licence |
+| White-label reselling | ❌ Requires Pro licence |
 
 The licence automatically converts to **Apache-2.0** on **2030-01-01**.
 
 See [LICENSE](LICENSE) for the full legal text.
 
-**To obtain a commercial licence:** contact [me@otokura.online](mailto:me@otokura.online)
+### Get a Pro Licence
+
+Pro licences are **per-deployment** (not per-seat). One key covers unlimited users on a single infrastructure deployment.
+
+- 📧 **Email:** [me@otokura.online](mailto:me@otokura.online)
+- 🌐 **Website:** [otokura.online](https://otokura.online)
+
+We typically respond within one business day.
 
 ---
 
@@ -705,5 +847,13 @@ For new features or significant changes, please open an issue first to discuss.
 ---
 
 <p align="center">
-  Built with ❤️ · <a href="mailto:me@otokura.online">me@otokura.online</a> · <a href="https://otokura.online">otokura.online</a>
+  <strong>Cognira CX Intelligence Platform</strong><br/>
+  Built for field teams that move fast and need data that keeps up.<br/><br/>
+  <a href="https://otokura.online">🌐 otokura.online</a> &nbsp;·&nbsp;
+  <a href="mailto:me@otokura.online">✉️ me@otokura.online</a> &nbsp;·&nbsp;
+  <a href="https://github.com/biulino/cognira">⭐ Star on GitHub</a>
+</p>
+
+<p align="center">
+  <em>If Cognira is saving your team time, consider giving the repo a ⭐ — it helps more people find it.</em>
 </p>
