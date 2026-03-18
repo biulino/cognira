@@ -48,6 +48,7 @@ async def lifespan(app: FastAPI):
         print(f"[alembic] WARNING: {result.stderr}", flush=True)
     else:
         print(f"[alembic] {result.stdout.strip() or 'DB up to date'}", flush=True)
+    startup_check()
     yield
     # shutdown
 
@@ -141,7 +142,7 @@ app.add_api_websocket_route("/api/ws", websocket_endpoint)
 
 
 # ── Edition endpoint (public, no auth) ────────────────────────────────────────
-from app.edition import edition_info  # noqa: E402
+from app.edition import edition_info, startup_check  # noqa: E402
 
 
 @app.get("/api/edition", tags=["edition"])

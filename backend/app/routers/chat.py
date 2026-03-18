@@ -11,6 +11,7 @@ from app.models.chat_sessao import ChatSessao
 from app.models.user import Utilizador
 from app.schemas import ChatRequest, ChatResponse, LogisticaPreviewReq, LogisticaExecReq
 from app.ai.agent import run_chat, run_logistica_preview, run_logistica_execute
+from app.edition import require_pro
 
 router = APIRouter()
 
@@ -50,6 +51,7 @@ async def chat(
     user: Utilizador = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
+    require_pro("ai_agents")
     sessao = await _load_or_create_session(body.session_id, user, db)
 
     # Pass last N messages as history to the agent (plain dicts)
@@ -128,6 +130,7 @@ async def logistica_preview(
     user: Utilizador = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
+    require_pro("ai_agents")
     if user.role_global not in ("admin", "coordenador"):
         raise HTTPException(403, "Apenas admin e coordenador podem usar Logística IA")
     return await run_logistica_preview(body.mensagem, db)
@@ -139,6 +142,7 @@ async def logistica_executa(
     user: Utilizador = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
+    require_pro("ai_agents")
     if user.role_global not in ("admin", "coordenador"):
         raise HTTPException(403, "Apenas admin e coordenador podem usar Logística IA")
     return await run_logistica_execute(

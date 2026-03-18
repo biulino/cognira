@@ -36,6 +36,7 @@ from app.database import get_db
 from app.models.user import Utilizador
 from app.services import pii
 from app.auth.jwt import hash_password
+from app.edition import require_pro
 
 settings = get_settings()
 router = APIRouter()
@@ -127,6 +128,7 @@ async def saml_metadata(request: Request):
 @router.get("/login")
 async def saml_login(request: Request):
     """Redirect browser to IdP for SP-initiated SSO."""
+    require_pro("sso")
     _require_saml()
     auth = _get_auth(request)
     redirect_url = auth.login()
@@ -141,6 +143,7 @@ async def saml_acs(
     db: AsyncSession = Depends(get_db),
 ):
     """Process the IdP SAML Response (POST binding)."""
+    require_pro("sso")
     _require_saml()
 
     form = await request.form()
@@ -265,6 +268,7 @@ async def saml_acs(
 @router.get("/slo")
 async def saml_slo(request: Request):
     """Handle IdP-initiated Single Logout Request."""
+    require_pro("sso")
     _require_saml()
     auth = _get_auth(request)
     url = auth.process_slo(delete_session_cb=lambda: None)

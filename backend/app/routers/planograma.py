@@ -28,6 +28,7 @@ from app.models.user import Utilizador
 from app.models.visit import Visita
 from app.services import storage
 from app.services.antivirus import scan_bytes
+from app.edition import require_pro
 from app.config import get_settings
 
 settings = get_settings()
@@ -233,6 +234,7 @@ async def comparar_planograma(
     db: AsyncSession = Depends(get_db),
 ):
     """Compare reference planogram against a visit photo using GPT-4o Vision."""
+    require_pro("ai_shelf_audit")
     p = await _get_planogram_or_404(db, planogram_id, user)
     if not p.imagem_minio_key:
         raise HTTPException(status_code=400, detail="Planograma sem imagem de referência.")

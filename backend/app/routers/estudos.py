@@ -20,6 +20,7 @@ from app.ai.intelligence import (
 )
 
 from app.models.visit import Visita
+from app.edition import require_pro
 from app.services.estudos_service import estudo_or_404 as _estudo_or_404, compute_benchmarking
 
 router = APIRouter()
@@ -387,6 +388,7 @@ async def gerar_relatorio_ia(
     db: AsyncSession = Depends(get_db),
 ):
     """Cognira Intelligence Module 1 — Generate a narrative AI report for a study/wave."""
+    require_pro("ai_planning")
     estudo = await _estudo_or_404(db, estudo_id, user)
 
     is_staff = user.role_global in ("admin", "coordenador")
@@ -415,6 +417,7 @@ async def planear_visitas_ia(
     db: AsyncSession = Depends(get_db),
 ):
     """Cognira Module 8 — AI-generated visit assignment plan for a specific onda."""
+    require_pro("ai_planning")
     estudo = await _estudo_or_404(db, estudo_id, user)
     if not estudo:
         raise HTTPException(404, "Estudo não encontrado")
@@ -489,6 +492,7 @@ async def get_insights_ia(
     db: AsyncSession = Depends(get_db),
 ):
     """Cognira Intelligence Module 5 — Generate real-time AI insights for a study."""
+    require_pro("ai_planning")
     estudo = await _estudo_or_404(db, estudo_id, user)
 
     is_staff = user.role_global in ("admin", "coordenador")
@@ -515,6 +519,7 @@ async def get_word_cloud(
     db: AsyncSession = Depends(get_db),
 ):
     """Extract keyword frequency cloud from open-text responses."""
+    require_pro("ai_planning")
     await _check_estudo_access(estudo_id, user, db)
     return await gerar_word_cloud(estudo_id, db, onda_id)
 
@@ -543,6 +548,7 @@ async def get_sentimento(
     db: AsyncSession = Depends(get_db),
 ):
     """NLP sentiment analysis over open-text visit responses."""
+    require_pro("ai_planning")
     await _check_estudo_access(estudo_id, user, db)
     return await analisar_sentimento(estudo_id, db, onda_id)
 

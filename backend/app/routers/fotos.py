@@ -17,6 +17,7 @@ from app.models.study import Estudo
 from app.models.user import Utilizador
 from app.models.visit import Visita
 from app.services import storage
+from app.edition import require_pro
 from app.services.antivirus import scan_bytes
 
 router = APIRouter()
@@ -212,6 +213,7 @@ async def analisar_foto(
 ):
     """Cognira Module 3 — Analyse a visit photo with GPT-4o Vision.
     Returns the AI analysis result and persists veredicto on the foto record."""
+    require_pro("ai_photo_analysis")
     from app.ai.intelligence import analisar_foto_ia
 
     await _get_visita_or_404(visita_id, user, db)

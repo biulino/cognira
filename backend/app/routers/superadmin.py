@@ -15,6 +15,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
 from app.deps import get_superadmin
 from app.models.tenant import Tenant, PlanoTenant
+from app.edition import require_pro
 from app.models.user import Utilizador
 
 router = APIRouter()
@@ -27,6 +28,7 @@ async def list_planos(
     db: AsyncSession = Depends(get_db),
     _: Utilizador = Depends(get_superadmin),
 ):
+    require_pro("superadmin")
     rows = (await db.execute(select(PlanoTenant).order_by(PlanoTenant.ordem))).scalars().all()
     return rows
 
@@ -84,6 +86,7 @@ async def list_tenants(
     db: AsyncSession = Depends(get_db),
     _: Utilizador = Depends(get_superadmin),
 ):
+    require_pro("superadmin")
     stmt = select(Tenant).order_by(Tenant.criado_em.desc())
     if q:
         stmt = stmt.where(

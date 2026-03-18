@@ -9,6 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.config import get_settings
 from app.database import get_db
 from app.deps import get_current_user
+from app.edition import require_pro
 from app.models.push import PushSubscription
 from app.models.user import Utilizador
 
@@ -37,6 +38,7 @@ async def subscribe(
     db: AsyncSession = Depends(get_db),
 ):
     """Register or refresh a push subscription for the current user."""
+    require_pro("push_notifications")
     existing = (
         await db.execute(
             select(PushSubscription).where(

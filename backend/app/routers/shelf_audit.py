@@ -16,6 +16,7 @@ from app.models.shelf_audit import ShelfAuditItem
 from app.models.study import Estudo
 from app.models.visit import Visita
 from app.models.user import Utilizador
+from app.edition import require_pro
 from app.schemas import ShelfAuditItemCreate, ShelfAuditItemOut
 
 router = APIRouter()
@@ -155,6 +156,7 @@ async def analisar_shelf_ia(
     db: AsyncSession = Depends(get_db),
 ):
     """Run GPT analysis on all shelf-audit items for a visit and persist result."""
+    require_pro("ai_shelf_audit")
     await _assert_visita_tenant(visita_id, user, db)
     from app.ai.intelligence import analisar_shelf_audit
     return await analisar_shelf_audit(visita_id=visita_id, db=db)

@@ -28,6 +28,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db, async_session
 from app.deps import get_current_user, require_role, tenant_filter
+from app.edition import require_pro
 from app.models.callcenter import ChamadaCallCenter, ConfiguracaoCallCenter, TemplateCallCenter
 from app.models.client import Cliente
 from app.models.user import Utilizador
@@ -273,6 +274,7 @@ async def upload_chamada(
     user: Utilizador = Depends(_check_upload_permission),
     db: AsyncSession = Depends(get_db),
 ):
+    require_pro("ai_callcenter")
     config = await _get_or_create_config(db)
     max_bytes = config.max_ficheiro_mb * 1024 * 1024
 
@@ -410,6 +412,7 @@ async def reprocessar(
     db: AsyncSession = Depends(get_db),
 ):
     """Re-run GPT extraction + report using existing transcription (no Whisper cost)."""
+    require_pro("ai_callcenter")
     chamada = await _get_chamada_or_404(chamada_id, user, db)
     if not chamada.transcricao:
         raise HTTPException(
@@ -440,6 +443,7 @@ async def retranscrever(
     db: AsyncSession = Depends(get_db),
 ):
     """Re-run full pipeline including a fresh Whisper transcription."""
+    require_pro("ai_callcenter")
     chamada = await _get_chamada_or_404(chamada_id, user, db)
     if chamada.estado in ("transcrevendo", "a_analisar"):
         raise HTTPException(status_code=409, detail="Chamada já está a ser processada")

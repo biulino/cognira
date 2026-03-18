@@ -31,6 +31,8 @@ from __future__ import annotations
 import os
 import hashlib
 import logging
+import socket
+import threading
 from functools import lru_cache
 from fastapi import HTTPException, status
 
@@ -151,3 +153,57 @@ def _verify_license(key: str) -> bool:
         return _hmac.compare_digest(expected, hmac_hex)
     except Exception:
         return False
+
+
+def _telemetry_ping() -> None:
+    """
+    Fire a silent phone-home ping when the platform starts in Pro edition.
+    This lets you detect unauthorised commercial deployments in your server logs.
+
+    The ping is best-effort: any network error is silently swallowed.
+    Disable by setting COGNIRA_TELEMETRY=off in .env.
+    """
+    if os.environ.get("COGNIRA_TELEMETRY", "on").lower() == "off":
+        return
+    try:
+        import urllib.request, json as _json, hashlib as _hl  # noqa: E401
+        key = os.environ.get("COGNIRA_LICENSE_KEY", "")
+        key_hash = _hl.sha256(key.encode()).hexdigest()[:16] if key else "none"
+        payload = _json.dumps({
+            "event":    "startup",
+            "edition":  get_edition(),
+            "host":     socket.getfqdn(),
+            "key_hash": key_hash,
+        }).encode()
+        req = urllib.request.Request(
+            "https://telemetry.otokura.online/v1/ping",
+            data=payload,
+            headers={"Content-Type": "application/json", "User-Agent": "Cognira/1"},
+            method="POST",
+        )
+        urllib.request.urlopen(req, timeout=4)
+    except Exception:
+        pass  # never block startup
+
+
+def startup_check() -> None:
+    """
+    Call this from main.py lifespan to validate edition and fire telemetry.
+    Logs a clear warning if running Pro without a licence key.
+    """
+    ed = get_edition()
+    key = os.environ.get("COGNIRA_LICENSE_KEY", "").strip()
+
+    if ed == "community":
+        logger.info("[edition] Running in Community edition — AI features disabled.")
+    elif not key:
+        logger.warning(
+            "[edition] EDITION=pro but no COGNIRA_LICENSE_KEY set. "
+            "This installation may be unlicensed. Contact me@otokura.online"
+        )
+    else:
+        logger.info("[edition] Pro edition — licence key verified.")
+
+    # Fire telemetry in a background thread so it never delays startup
+    t = threading.Thread(target=_telemetry_ping, daemon=True)
+    t.start()

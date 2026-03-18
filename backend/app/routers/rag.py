@@ -17,6 +17,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
 from app.deps import get_current_user, require_role, tenant_filter
+from app.edition import require_pro
 from app.models.user import Utilizador
 
 router = APIRouter()
@@ -91,6 +92,7 @@ async def rag_ingest(
     db: AsyncSession = Depends(get_db),
 ):
     """Ingest a text chunk: generate embedding via OpenAI and persist to DB."""
+    require_pro("ai_agents")
     if not body.conteudo.strip():
         raise HTTPException(status_code=422, detail="conteudo cannot be empty")
 
@@ -137,6 +139,7 @@ async def rag_search(
     db: AsyncSession = Depends(get_db),
 ):
     """Semantic search: embed query and return top-k most similar chunks."""
+    require_pro("ai_agents")
     if not body.query.strip():
         raise HTTPException(status_code=422, detail="query cannot be empty")
 

@@ -22,6 +22,7 @@ from app.models.webhook import ApiKey
 from app.models.client import Cliente
 from app.models.establishment import Estabelecimento
 from app.models.visit import Visita
+from app.edition import require_pro
 from app.models.study import Estudo
 
 router = APIRouter(prefix="/external", tags=["external-api"])
@@ -33,6 +34,7 @@ async def get_key_info(
     db: AsyncSession = Depends(get_db),
 ):
     """Returns metadata about the calling API key and its associated client."""
+    require_pro("api_keys")
     cliente = (
         await db.execute(select(Cliente).where(Cliente.id == key.cliente_id))
     ).scalar_one_or_none()

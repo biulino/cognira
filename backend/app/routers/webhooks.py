@@ -56,6 +56,7 @@ from app.deps import get_current_user, require_role, tenant_filter
 from app.models.client import Cliente
 from app.models.user import Utilizador
 from app.models.webhook import ApiKey, WebhookSubscription, WebhookDelivery
+from app.edition import require_pro
 from app.services.webhooks import EVENTS
 
 router = APIRouter()
@@ -94,6 +95,7 @@ async def create_api_key(
     db: AsyncSession = Depends(get_db),
 ):
     """Generate a new API key for a client. Returns the raw key ONCE."""
+    require_pro("api_keys")
     tid = tenant_filter(user)
     if tid is not None:
         cliente = (
@@ -197,6 +199,7 @@ async def create_subscription(
     user: Utilizador = Depends(require_role("admin", "coordenador")),
     db: AsyncSession = Depends(get_db),
 ):
+    require_pro("webhooks")
     _validate_webhook_url(body.url)
     tid = tenant_filter(user)
     if tid is not None:

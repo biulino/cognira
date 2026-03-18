@@ -12,6 +12,7 @@ from app.schemas import (
     BlacklistCreate, BlacklistOut,
 )
 from app.ai.intelligence import analisar_anomalias_analistas, score_preditivo_analista, coaching_analista
+from app.edition import require_pro
 from app.services import pii
 
 router = APIRouter()
@@ -45,6 +46,7 @@ async def anomalias_analistas(
     db: AsyncSession = Depends(get_db),
 ):
     """Cognira Module 4 — Detect analista score outliers."""
+    require_pro("ai_scoring")
     return await analisar_anomalias_analistas(estudo_id=estudo_id, db=db, dias=dias)
 
 
@@ -55,6 +57,7 @@ async def score_preditivo(
     db: AsyncSession = Depends(get_db),
 ):
     """Cognira Module 7 — Predictive quality score for a single analista."""
+    require_pro("ai_scoring")
     return await score_preditivo_analista(analista_id=analista_id, db=db)
 
 
@@ -65,6 +68,7 @@ async def coaching_ia(
     db: AsyncSession = Depends(get_db),
 ):
     """Cognira Module 14 — AI personalised coaching based on 90-day metrics."""
+    require_pro("ai_scoring")
     return await coaching_analista(analista_id=analista_id, db=db)
 
 

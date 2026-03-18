@@ -19,6 +19,7 @@ from app.models.visit import Visita, CampoVisita, CaracterizacaoCache
 from app.models.photo import FotoVisita
 from app.models.user import Utilizador
 from app.schemas import VisitaCreate, VisitaOut, VisitaEstadoUpdate, VisitaListResponse
+from app.edition import require_pro
 from app.services.state_machine import transition_visita
 from app.services import pii
 from app.services.audit import log_action
@@ -987,6 +988,7 @@ async def validar_visita_ia(
 
     Analyses responses and flags inconsistencies; returns recommendation (aprovar/corrigir/rever).
     """
+    require_pro("ai_validation")
     _tid_vai = tenant_filter(user)
     if _tid_vai is not None:
         from app.models.study import Estudo as _EstudoVAI
@@ -1013,6 +1015,7 @@ async def run_auto_qc(
     db: AsyncSession = Depends(get_db),
 ):
     """Cognira Module 13 — AI auto-QC: flag suspicious or inconsistent responses."""
+    require_pro("ai_validation")
     _tid_aqc = tenant_filter(user)
     if _tid_aqc is not None:
         from app.models.study import Estudo as _EstudoAQC
