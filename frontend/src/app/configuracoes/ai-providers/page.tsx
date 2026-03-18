@@ -28,7 +28,7 @@ import { useI18n } from "@/lib/i18n";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-type ProviderType = "openai_compat" | "anthropic" | "custom" | "q21_internal";
+type ProviderType = "openai_compat" | "anthropic" | "custom" | "cognira_internal";
 
 interface ProviderModels {
   chat?: string;
@@ -60,7 +60,7 @@ interface AIConfig {
 
 const PROVIDER_TYPES: { value: ProviderType; label: string; description: string; defaultUrl: string }[] = [
   {
-    value: "q21_internal",
+    value: "cognira_internal",
     label: "Cognira Internal",
     description: "Infraestrutura de IA gerida pela Cognira (padrão)",
     defaultUrl: "https://api.openai.com/v1",
