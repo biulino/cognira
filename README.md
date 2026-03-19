@@ -744,6 +744,7 @@ GitHub Actions runs the backend test suite on every push to `main` and `develop`
 - [ ] Point `MINIO_ENDPOINT` to your MinIO instance
 - [ ] Configure SMTP for email notifications
 - [ ] Set up TLS certs in `infra/nginx/certs/` and enable HTTPS in `nginx.conf`
+- [ ] Create the nginx Basic Auth file for the demo page: `htpasswd -B -c infra/nginx/.htpasswd <username>`
 - [ ] Set `EDITION=pro` + `COGNIRA_LICENSE_KEY` (Pro features)
 - [ ] Configure VAPID keys for push notifications (Pro)
 - [ ] Configure coturn TURN server (Pro WebRTC)

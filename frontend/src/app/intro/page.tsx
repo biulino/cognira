@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 
-// ─── Demo account definitions ────────────────────────────────────────────────
+// ─── Demo account definitions (passwords loaded at runtime — not in source) ──
 
 const PLATFORM_ACCOUNTS = [
   {
@@ -13,7 +14,6 @@ const PLATFORM_ACCOUNTS = [
     badgeColor: "bg-red-100 text-red-700",
     labelColor: "text-red-800",
     email: "admin@estudosmercado.pt",
-    password: "AdminSeguro2026!",
     note: "Acede ao painel global /super-admin — gere todos os tenants",
     access: ["Super-admin: gerir todos os tenants", "Criação de tenants e planos", "Providers de IA e pool de modelos"],
   },
@@ -24,7 +24,6 @@ const PLATFORM_ACCOUNTS = [
     badgeColor: "bg-indigo-100 text-indigo-700",
     labelColor: "text-indigo-800",
     email: "ana@testagency.com",
-    password: "AdminDemo2026!",
     note: "Tenant: Test Agency — acede ao painel /tenant-admin",
     access: ["Painel de administração do tenant", "Gestão de utilizadores e branding", "Módulos, SLA e webhooks"],
   },
@@ -35,7 +34,6 @@ const PLATFORM_ACCOUNTS = [
     badgeColor: "bg-violet-100 text-violet-700",
     labelColor: "text-violet-800",
     email: "coord@estudosmercado.pt",
-    password: "CoordSeguro2026!",
     note: "Tenant: Cognira Demo",
     access: ["Gestão de estudos e visitas", "Validação e relatórios IA", "Chat interno e exportações"],
   },
@@ -46,7 +44,6 @@ const PLATFORM_ACCOUNTS = [
     badgeColor: "bg-amber-100 text-amber-700",
     labelColor: "text-amber-800",
     email: "validador@estudosmercado.pt",
-    password: "ValidSeguro2026!",
     note: "Tenant: Cognira Demo",
     access: ["Validação de visitas e exceções", "Mensagens de visita"],
   },
@@ -57,18 +54,17 @@ const PLATFORM_ACCOUNTS = [
     badgeColor: "bg-green-100 text-green-700",
     labelColor: "text-green-800",
     email: "ana.silva@demo.pt",
-    password: "AnalistaDemo2026!",
     note: "Tenant: Cognira Demo",
     access: ["Dashboard pessoal", "Submissão de visitas e fotos", "Formações e certificações"],
   },
 ];
 
 const CLIENT_PORTAL_ACCOUNTS = [
-  { username: "cliente_vodafone", email: "cliente.vf@demo.pt",   password: "ClienteVF2026!",   label: "Vodafone" },
-  { username: "cliente_nos",      email: "cliente.nos@demo.pt",  password: "ClienteNOS2026!",  label: "NOS" },
-  { username: "cliente_mcd",      email: "cliente.mcd@demo.pt",  password: "ClienteMCD2026!",  label: "McDonald's" },
-  { username: "cliente_galp",     email: "cliente.galp@demo.pt", password: "ClienteGALP2026!", label: "GALP" },
-  { username: "cliente_fnac",     email: "cliente.fnac@demo.pt", password: "ClienteFNAC2026!", label: "FNAC" },
+  { username: "cliente_vodafone", email: "cliente.vf@demo.pt",   label: "Vodafone" },
+  { username: "cliente_nos",      email: "cliente.nos@demo.pt",  label: "NOS" },
+  { username: "cliente_mcd",      email: "cliente.mcd@demo.pt",  label: "McDonald's" },
+  { username: "cliente_galp",     email: "cliente.galp@demo.pt", label: "GALP" },
+  { username: "cliente_fnac",     email: "cliente.fnac@demo.pt", label: "FNAC" },
 ];
 
 const FEATURES = [
@@ -147,6 +143,19 @@ const FEATURES = [
 ];
 
 export default function IntroPage() {
+  const [platformPasswords, setPlatformPasswords] = useState<string[]>([]);
+  const [clientPasswords, setClientPasswords] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetch("/api/demo-creds")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data.platform)) setPlatformPasswords(data.platform);
+        if (Array.isArray(data.clients)) setClientPasswords(data.clients);
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/20">
 
@@ -195,7 +204,7 @@ export default function IntroPage() {
         {/* Platform accounts */}
         <h2 className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-3">Contas da plataforma</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-          {PLATFORM_ACCOUNTS.map((acc) => (
+          {PLATFORM_ACCOUNTS.map((acc, i) => (
             <div key={acc.role} className={`rounded-2xl border p-5 ${acc.color}`}>
               <div className="flex items-center justify-between mb-1">
                 <span className={`text-sm font-bold ${acc.labelColor}`}>{acc.role}</span>
@@ -209,7 +218,7 @@ export default function IntroPage() {
                 </div>
                 <div className="flex gap-2">
                   <span className="text-slate-400 w-16 shrink-0">Password</span>
-                  <span className="text-slate-800 font-semibold">{acc.password}</span>
+                  <span className="text-slate-800 font-semibold">{platformPasswords[i] ?? "—"}</span>
                 </div>
               </div>
               <ul className="space-y-1">
@@ -239,7 +248,7 @@ export default function IntroPage() {
                 <tr key={c.username} className={i < CLIENT_PORTAL_ACCOUNTS.length - 1 ? "border-b border-slate-100" : ""}>
                   <td className="px-4 py-3 font-semibold text-slate-700">{c.label}</td>
                   <td className="px-4 py-3 font-mono text-xs text-slate-600">{c.email}</td>
-                  <td className="px-4 py-3 font-mono text-xs text-slate-600">{c.password}</td>
+                  <td className="px-4 py-3 font-mono text-xs text-slate-600">{clientPasswords[i] ?? "—"}</td>
                 </tr>
               ))}
             </tbody>

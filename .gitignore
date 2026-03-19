@@ -52,3 +52,6 @@ htmlcov/
 # ── Alembic generated (keep versions tracked) ──────────
 # alembic/versions/ — intentionally tracked
 
+
+# ── Nginx credentials (generated locally, never committed) ──────────────────
+infra/nginx/.htpasswd
