@@ -101,6 +101,7 @@ from app.routers import planograma  # noqa: E402
 from app.routers import branding  # noqa: E402
 from app.routers import superadmin  # noqa: E402
 from app.routers import onboarding  # noqa: E402
+from app.routers import billing  # noqa: E402
 from app.routers import ai_providers  # noqa: E402
 from app.routers import saml  # noqa: E402
 from app.routers import external  # noqa: E402
@@ -139,6 +140,7 @@ app.include_router(planograma.router, prefix="/api/planogramas", tags=["planogra
 app.include_router(branding.router, prefix="/api/branding", tags=["branding"])
 app.include_router(superadmin.router, prefix="/api/superadmin", tags=["superadmin"])
 app.include_router(onboarding.router, prefix="/api/onboarding", tags=["onboarding"])
+app.include_router(billing.router, prefix="/api/billing", tags=["billing"])
 app.include_router(ai_providers.router, prefix="/api/ai-providers", tags=["ai-providers"])
 app.include_router(external.router, prefix="/api", tags=["external-api"])
 app.include_router(status_router.router, prefix="/api", tags=["status"])

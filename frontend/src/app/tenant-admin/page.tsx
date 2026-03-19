@@ -33,17 +33,18 @@ interface Stats {
 }
 
 const QUICK_ACTIONS = [
-  { href: "/tenant-admin/status", icon: Activity,   label: "Estado do Sistema",  desc: "Saúde dos serviços e subsistemas" },
-  { href: "/utilizadores",    icon: Users,       label: "Utilizadores",      desc: "Gerir contas, roles e permissões" },
-  { href: "/configuracoes",   icon: Settings,    label: "Configurações",     desc: "Permissões de navegação por role" },
-  { href: "/configuracoes/branding", icon: Palette, label: "Branding",      desc: "Logo, cores e personalização" },
-  { href: "/planos",          icon: Layers,      label: "Suites & Módulos",  desc: "Catálogo de módulos disponíveis" },
-  { href: "/webhooks",        icon: Webhook,     label: "API & Webhooks",    desc: "Chaves de API e integrações" },
-  { href: "/sla",             icon: BellRing,    label: "Monitor SLA",       desc: "Thresholds e alertas de SLA" },
-  { href: "/audit",           icon: ShieldAlert, label: "Audit Log",         desc: "Registo de acções no tenant" },
-  { href: "/pagamentos",      icon: CreditCard,  label: "Pagamentos",        desc: "Comissões e histórico financeiro" },
-  { href: "/relatorios",      icon: BarChart3,   label: "Relatórios",        desc: "Exportações e análise de dados" },
-  { href: "/clientes",        icon: Building2,   label: "Clientes",          desc: "Empresas-cliente no tenant" },
+  { href: "/tenant-admin/status",   icon: Activity,    label: "Estado do Sistema",  desc: "Saúde dos serviços e subsistemas" },
+  { href: "/utilizadores",          icon: Users,       label: "Utilizadores",       desc: "Gerir contas, roles e permissões" },
+  { href: "/configuracoes",         icon: Settings,    label: "Configurações",      desc: "Permissões de navegação por role" },
+  { href: "/configuracoes/branding",icon: Palette,     label: "Branding",           desc: "Logo, cores e personalização" },
+  { href: "/planos",                icon: Layers,      label: "Suites & Módulos",   desc: "Catálogo de módulos disponíveis" },
+  { href: "/webhooks",              icon: Webhook,     label: "API & Webhooks",     desc: "Chaves de API e integrações" },
+  { href: "/sla",                   icon: BellRing,    label: "Monitor SLA",        desc: "Thresholds e alertas de SLA" },
+  { href: "/audit",                 icon: ShieldAlert, label: "Audit Log",          desc: "Registo de acções no tenant" },
+  { href: "/tenant-admin/billing",  icon: CreditCard,  label: "Subscrição",         desc: "Plano, billing e gestão Stripe" },
+  { href: "/pagamentos",            icon: BarChart3,   label: "Pagamentos",         desc: "Comissões e histórico financeiro" },
+  { href: "/relatorios",            icon: BarChart3,   label: "Relatórios",         desc: "Exportações e análise de dados" },
+  { href: "/clientes",              icon: Building2,   label: "Clientes",           desc: "Empresas-cliente no tenant" },
   { href: "/configuracoes/ai-routing", icon: Brain,        label: "Routing IA",       desc: "Escolher provider por tarefa de IA" },
   { href: "/configuracoes/permissoes", icon: ShieldCheck,  label: "Permissões Nav",   desc: "Gerir o que cada role pode ver" },
 ];
@@ -198,6 +199,39 @@ export default function TenantAdminPage() {
             <span>Este painel gere <strong>este tenant</strong> — utilizadores, branding, módulos, SLA e integrações. Para gerir toda a plataforma (tenants, planos, providers de IA), aceda ao <strong>Painel de Plataforma</strong> com conta superadmin.</span>
           </div>
         </div>
+
+        {/* Trial / suspended upgrade banner */}
+        {tenant && ["trial", "suspended", "cancelled"].includes(tenant.status) && (
+          <div className={`flex items-center justify-between gap-4 p-4 rounded-2xl border mb-6 ${
+            tenant.status === "trial" && (daysLeft ?? 99) <= 3
+              ? "bg-red-50 border-red-200"
+              : tenant.status === "trial"
+              ? "bg-amber-50 border-amber-200"
+              : "bg-red-50 border-red-200"
+          }`}>
+            <div className="flex items-center gap-3">
+              <AlertTriangle className={`w-5 h-5 shrink-0 ${
+                tenant.status !== "trial" || (daysLeft ?? 99) <= 3 ? "text-red-600" : "text-amber-600"
+              }`} />
+              <p className={`text-sm font-medium ${
+                tenant.status !== "trial" || (daysLeft ?? 99) <= 3 ? "text-red-700" : "text-amber-700"
+              }`}>
+                {tenant.status === "trial"
+                  ? daysLeft === 0
+                    ? "Trial expirado. A conta ficará suspensa em breve."
+                    : `${daysLeft} dia${daysLeft !== 1 ? "s" : ""} de trial restante${daysLeft !== 1 ? "s" : ""}.`
+                  : "Conta suspensa. Active uma subscrição para retomar o acesso."}
+              </p>
+            </div>
+            <Link
+              href="/tenant-admin/billing"
+              className="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-xl transition-colors"
+            >
+              <CreditCard className="w-3.5 h-3.5" />
+              Gerir subscrição
+            </Link>
+          </div>
+        )}
 
         {/* KPI row */}
         {stats && (

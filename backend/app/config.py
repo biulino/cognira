@@ -88,6 +88,13 @@ class Settings(BaseSettings):
     # Error tracking
     sentry_dsn: str = ""
 
+    # Stripe billing
+    stripe_secret_key: str = ""              # sk_live_... or sk_test_...
+    stripe_webhook_secret: str = ""          # whsec_... from Stripe Dashboard
+    stripe_price_starter: str = ""           # price_... for Starter plan
+    stripe_price_professional: str = ""      # price_... for Professional plan
+    stripe_price_enterprise: str = ""        # price_... for Enterprise plan
+
     model_config = {"env_file": ".env", "extra": "ignore"}
 
 

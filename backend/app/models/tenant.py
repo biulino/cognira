@@ -28,6 +28,7 @@ class PlanoTenant(Base):
     max_visitas_mes: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     trial_dias: Mapped[int] = mapped_column(Integer, nullable=False, default=14)
     features: Mapped[Optional[dict]] = mapped_column(JSONB, nullable=True)
+    stripe_price_id: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     is_public: Mapped[bool] = mapped_column(Boolean, default=True)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     ordem: Mapped[int] = mapped_column(Integer, default=0)
@@ -65,6 +66,11 @@ class Tenant(Base):
     favicon_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
     dominio_custom: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     css_custom: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+
+    # Stripe billing
+    stripe_customer_id: Mapped[Optional[str]] = mapped_column(String(100), nullable=True, index=True, unique=True)
+    stripe_subscription_id: Mapped[Optional[str]] = mapped_column(String(100), nullable=True, index=True)
+    stripe_subscription_status: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
 
     notas: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     criado_em: Mapped[datetime] = mapped_column(
